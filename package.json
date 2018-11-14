@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Brian-MacMonigle/swe-632-shopping-website#readme",
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "yarn": "^1.12.3"
   }
 }
