@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "heroku-postbuild": "cd react-app && yarn install && yarn install --dev && yarn build"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/Brian-MacMonigle/swe-632-shopping-website/issues"
   },
-  "homepage": "https://github.com/Brian-MacMonigle/swe-632-shopping-website#readme"
+  "homepage": "https://github.com/Brian-MacMonigle/swe-632-shopping-website#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
 }
