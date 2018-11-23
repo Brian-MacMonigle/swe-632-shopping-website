@@ -1,20 +1,65 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import Styled from 'styled-components';
 
 import Header from '../Header';
+import SideBar from '../SideBar';
+import Footer from '../Footer';
 import PageNotFound from '../PageNotFound';
 import HomePage from '../HomePage';
+
+const DomPageWrapper = Styled.div`
+	display: grid;
+	grid-template-columns: 300px auto;
+	grid-template-rows: 100px auto 100px;
+	grid-template-areas: 
+		"header header"
+		"sideBar page"
+		"footer footer";
+	justify-content: stretch;
+	align-content: stretch;
+
+	height: 100%;
+`;
+
+const HeaderWrapper = Styled.div`
+	grid-area: header;
+`;
+
+const SideBarWrapper = Styled.div`
+	grid-area: sideBar;
+`;
+
+const PageWrapper = Styled.div`
+	grid-area: page;
+`;
+
+const FooterWrapper = Styled.div`
+	grid-area: footer;
+`;
 
 class DomWrapper extends React.Component {
 	render() {
 		return (
 			<BrowserRouter>
 				<React.Fragment>
-					<Header />
-					<Switch>
-						<Route exact path="/" component={HomePage} />
-						<Route path="/" component={PageNotFound} />
-					</Switch>
+					<DomPageWrapper>
+						<HeaderWrapper>
+							<Header />
+						</HeaderWrapper>
+						<SideBarWrapper>
+							<SideBar />
+						</SideBarWrapper>
+						<PageWrapper>
+							<Switch>
+								<Route exact path="/" component={HomePage} />
+								<Route path="/" component={PageNotFound} />
+							</Switch>
+						</PageWrapper>
+						<FooterWrapper>
+							<Footer />
+						</FooterWrapper>
+					</DomPageWrapper>
 				</React.Fragment>
 			</BrowserRouter>
 		);

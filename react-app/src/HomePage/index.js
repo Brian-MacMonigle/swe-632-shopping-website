@@ -2,18 +2,25 @@ import React from 'react';
 import Styled from 'styled-components';
 
 import LinkWrapper from '../LinkWrapper';
+import SearchBar from '../SearchBar';
+
+const HomePageWrapper = Styled.div`
+`
 
 const CategoryWrapper = Styled.div`
 	flex: 1 0 0;
-	width: 100%;
-	height: 100%;
 	font-size: 2em;
-	padding: 0.25em;
+	padding: 0.5em;
 	border: 1px solid black;
 `;
 
 const CategoryTextWrapper = Styled.div`
-    text-decoration: none;
+	color: blue;
+	text-align: center;
+`;
+
+const CenterTextWrapper = Styled.div`
+	text-align: center;
 `;
 
 class Category extends React.Component {
@@ -31,9 +38,12 @@ class Category extends React.Component {
 }
 
 const CategoryContainer = Styled.div`
-	display: flex;
 	width: 75%;
+	padding: 3em;
 	margin: auto;
+
+
+	display: flex;
 	justify-content: center;
 	align-items: stretch;
 `;
@@ -41,15 +51,18 @@ const CategoryContainer = Styled.div`
 class HomePage extends React.Component {
 	render() {
 		return (
-			<div>
-				I am the HopePage
+			<HomePageWrapper>
 				<CategoryContainer>
 					<Category to="/protien">Meat & Protien</Category>
 					<Category to="/dairy" >Dairy</Category>
-					<Category to="/carbs" >Past & Carbs</Category>
+					<Category to="/carbs" >Pasta & Carbs</Category>
 					<Category to="/snaks" >Snacks & Soda</Category>
 				</CategoryContainer>
-			</div>
+				<CenterTextWrapper>
+					<h1>Search the store</h1>
+				</CenterTextWrapper>
+				<SearchBar fontSize={"2em"}/>
+			</HomePageWrapper>
 			);
 	}
 }

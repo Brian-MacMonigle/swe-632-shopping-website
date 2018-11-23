@@ -1,9 +1,14 @@
 import React from 'react';
 import Styled from 'styled-components';
 
+import LinkWrapper from '../LinkWrapper';
+import SearchBar from '../SearchBar';
+
 const HeaderWrapper = Styled.div`
+	display: flex;
+	justify-content: space-between;
 	width: 100%;
-	height: 100px;
+	height: 100%;
 	font-size: 3em;
 	background: Green;
 `;
@@ -19,7 +24,12 @@ class Header extends React.Component {
 		return (
 			<HeaderWrapper>
 				<ElementWrapper>
-					Brian's Groceries
+					<LinkWrapper to="/">
+						Brian's Groceries
+					</LinkWrapper>
+				</ElementWrapper>
+				<ElementWrapper>
+					<SearchBar />
 				</ElementWrapper>
 			</HeaderWrapper>
 		);
