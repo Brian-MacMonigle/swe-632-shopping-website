@@ -7,6 +7,8 @@ import SideBar from '../SideBar';
 import Footer from '../Footer';
 import PageNotFound from '../PageNotFound';
 import HomePage from '../HomePage';
+import CategoryPage from '../CategoryPage';
+import {PROTIEN, DAIRY, CARBS, SNACKS} from '../FoodItem';
 
 const DomPageWrapper = Styled.div`
 	display: grid;
@@ -19,7 +21,7 @@ const DomPageWrapper = Styled.div`
 	justify-content: stretch;
 	align-content: stretch;
 
-	max-height: 100vh;
+	height: 100vh;
 `;
 
 const HeaderWrapper = Styled.div`
@@ -28,10 +30,12 @@ const HeaderWrapper = Styled.div`
 
 const SideBarWrapper = Styled.div`
 	grid-area: sideBar;
+	overflow-y: auto;
 `;
 
 const PageWrapper = Styled.div`
 	grid-area: page;
+	overflow-y: auto;
 `;
 
 const FooterWrapper = Styled.div`
@@ -53,6 +57,10 @@ class DomWrapper extends React.Component {
 						<PageWrapper>
 							<Switch>
 								<Route exact path="/" component={HomePage} />
+								<Route path={`/${PROTIEN}`} render={() => <CategoryPage type={PROTIEN} />} />
+								<Route path={`/${DAIRY}`} render={() => <CategoryPage type={DAIRY} />} />
+								<Route path={`/${CARBS}`} render={() => <CategoryPage type={CARBS} />} />
+								<Route path={`/${SNACKS}`} render={() => <CategoryPage type={SNACKS} />} />
 								<Route path="/" component={PageNotFound} />
 							</Switch>
 						</PageWrapper>

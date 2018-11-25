@@ -22,6 +22,10 @@ const ButtonWrapper = Styled.span`
 	}
 `;
 
+const UnstyledWrapper = Styled.span`
+	cursor: pointer;
+`;
+
 class Button extends React.Component {
 	constructor(props) {
 		super(props);
@@ -34,10 +38,28 @@ class Button extends React.Component {
 				onClick={this.onClick}
 				fontSize={this.props.fontSize}
 			>
-				{this.props.value}
+				{this.props.value || this.props.children}
 			</ButtonWrapper>
 		);
 	}
 }
 
+class UnstyledButton extends React.Component {
+	constructor(props) {
+		super(props);
+		this.onClick = props.onClick || (() => false);
+	}
+
+	render() {
+		return (
+			<UnstyledWrapper 
+				onClick={this.onClick}
+			>
+				{this.props.value || this.props.children}
+			</UnstyledWrapper>
+		);
+	}
+}
+
 export default Button;
+export {UnstyledButton};

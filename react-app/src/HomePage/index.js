@@ -1,11 +1,12 @@
 import React from 'react';
 import Styled from 'styled-components';
 
+import {PROTIEN, DAIRY, CARBS, SNACKS, prettyCategoryType} from '../FoodItem';
 import LinkWrapper from '../LinkWrapper';
 import SearchBar from '../SearchBar';
 
 const HomePageWrapper = Styled.div`
-`
+`;
 
 const CategoryWrapper = Styled.div`
 	flex: 1 0 0;
@@ -27,9 +28,9 @@ class Category extends React.Component {
 	render() {
 		return (
 			<CategoryWrapper>
-				<LinkWrapper to={this.props.to}>
+				<LinkWrapper to={`/${this.props.category}`}>
 					<CategoryTextWrapper>
-						{this.props.children}
+						{prettyCategoryType(this.props.category)}
 					</CategoryTextWrapper>
 				</LinkWrapper>
 			</CategoryWrapper>
@@ -39,8 +40,8 @@ class Category extends React.Component {
 
 const CategoryContainer = Styled.div`
 	width: 75%;
-	padding: 3em;
-	margin: auto;
+	padding: 1em 2em;
+	margin: 1em auto;
 
 
 	display: flex;
@@ -48,15 +49,24 @@ const CategoryContainer = Styled.div`
 	align-items: stretch;
 `;
 
+
+const CategoryContainerTitle = Styled.h1`
+	text-align: center;
+`;
+
+
 class HomePage extends React.Component {
 	render() {
 		return (
 			<HomePageWrapper>
+				<CategoryContainerTitle>
+					Search by Category
+				</CategoryContainerTitle>
 				<CategoryContainer>
-					<Category to="/protien">Meat & Protien</Category>
-					<Category to="/dairy" >Dairy</Category>
-					<Category to="/carbs" >Pasta & Carbs</Category>
-					<Category to="/snaks" >Snacks & Soda</Category>
+					<Category category={PROTIEN} />
+					<Category category={DAIRY} />
+					<Category category={CARBS} />
+					<Category category={SNACKS} />
 				</CategoryContainer>
 				<CenterTextWrapper>
 					<h1>Search the store</h1>

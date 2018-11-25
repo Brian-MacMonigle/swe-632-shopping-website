@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import Styled from 'styled-components';
 
 import TextBox from '../TextBox';
@@ -15,35 +15,30 @@ class SearchBar extends React.Component {
 		super(props);
 		this.state = {
 			searchValue: "",
-			searched: false,
 		}
+		this.SearchButton = withRouter(({ history }) => (
+			<Button
+				onClick={() => this.onSearch(history)}
+				fontSize={this.props.fontSize || "0.5em"}
+			>
+				Search
+			</Button>
+		));
 	}
 
 	onType = (event) => {
 		this.setState({searchValue: event.target.value})
 	}
 
-	onSearch = () => {
+	onSearch = (history) => {
 		if(this.state.searchValue.length !== 0) {
 			console.log(`You have search for '${this.state.searchValue}'`);
-			this.setState({searched: true});
+			history.push(`/search/?val=${this.state.searchValue}`)
 		}
 	}
 
 	render() {
-		if(this.state.searched) {
-			// Though react complains, this is the only way to redirect properly
-			this.setState({searched: false});
-			return (
-				<Redirect 
-					to={{
-						pathname: "/search",
-						search: `?value=${this.state.searchValue}`,
-					}}
-					push
-				/>
-			);
-		}
+		const { SearchButton } = this;
 		return (
 			<SearchBoxWrapper>
 				<TextBox 
@@ -52,11 +47,12 @@ class SearchBar extends React.Component {
 					onEnter={this.onSearch}
 					fontSize={this.props.fontSize}
 				/>
-				<Button
-					value="Search"
+				<SearchButton					
 					onClick={this.onSearch}
 					fontSize={this.props.fontSize || "0.5em"}
-				/>
+				>
+					Search
+				</SearchButton>
 			</SearchBoxWrapper>
 		);
 	}

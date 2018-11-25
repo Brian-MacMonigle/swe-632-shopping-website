@@ -1,6 +1,8 @@
 import React from 'react';
 import Styled from 'styled-components';
 
+import { UnstyledButton } from '../Button';
+
 const ComponentWrapper = Styled.div`
 	font-size: ${props => props.fontSize || "1em"};
 	overflow-y: auto;
@@ -49,15 +51,32 @@ const TD = Styled.td`
 `;
 
 class Table extends React.Component {
-	render() {
-		const { headers = [], rows = [[]], footer = [] } = this.props.data || {};
 
-		while(headers.length < footer.length) {
+	onOptionsClick = (event) => {
+	}
+
+	render() {
+		const { headers = [], rows = [[]], footers = [], options } = this.props;
+
+		while(headers.length < footers.length) {
 			headers.push("");
 		}
 
-		while(footer.length < headers.length) {
-			footer.push("");
+		while(footers.length != 0 && footers.length < headers.length) {
+			footers.push("");
+		}
+
+		if(options) {
+			headers.unshift((
+				<UnstyledButton 
+					onClick={this.onOptionsClick}
+				>
+					*
+				</UnstyledButton>
+			));
+			if(footers.length > 0) {
+				footers.unshift("");
+			}
 		}
 
 		return (
@@ -88,7 +107,7 @@ class Table extends React.Component {
 					</Tbody>
 					<Tfoot>
 						<TR>
-							{footer.map((footer, i) => (
+							{footers.map((footer, i) => (
 								<TD key={`table-footer-${i}`}>
 									{footer}
 								</TD>
@@ -101,4 +120,11 @@ class Table extends React.Component {
 	}
 }
 
+class FoodTable extends React.Component {
+	render() {
+		return <div>Table thing</div>
+	}
+}
+
 export default Table;
+export { FoodTable };

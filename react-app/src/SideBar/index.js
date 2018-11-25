@@ -7,11 +7,9 @@ import Table from '../Table';
 // Code that puts the SideBar on the left side is in DomWrapper
 
 const SideBarWrapper = Styled.div`
-	width: 100%;
 	height: 100%;
 
 	border-right: 1px solid black;
-	border-bottom: 1px solid black;
 
 	display: flex;
 	flex-direction: column;
@@ -31,6 +29,7 @@ const LoginButtonWrapper = Styled.div`
 
 const TableWrapper = Styled.div`
 	flex-grow: 1;
+	overflow-y: auto;
 `;
 
 const BuyButtonWrapper = Styled.div`
@@ -38,45 +37,16 @@ const BuyButtonWrapper = Styled.div`
 `;
 
 class SideBar extends React.Component {
+	headers = ["Item", "Item Cost", "Remove Item"];
 
-	someData = {
-		headers: ["Item", "Item Cost", "Remove Item"],
-		rows: [
-			["Milk", "$2", <Button value="Remove" />],
-			["Eggs", "$1", <Button value="Remove" />],
-			["Milk", "$2", <Button value="Remove" />],
-			["Eggs", "$1", <Button value="Remove" />],
-			["Milk", "$2", <Button value="Remove" />],
-			["Eggs", "$1", <Button value="Remove" />],
-			["Milk", "$2", <Button value="Remove" />],
-			["Eggs", "$1", <Button value="Remove" />],
-			["Milk", "$2", <Button value="Remove" />],
-			["Eggs", "$1", <Button value="Remove" />],
-			["Milk", "$2", <Button value="Remove" />],
-			["Eggs", "$1", <Button value="Remove" />],
-			["Milk", "$2", <Button value="Remove" />],
-			["Eggs", "$1", <Button value="Remove" />],
-			["Milk", "$2", <Button value="Remove" />],
-			["Eggs", "$1", <Button value="Remove" />],
-			["Milk", "$2", <Button value="Remove" />],
-			["Eggs", "$1", <Button value="Remove" />],
-			["Milk", "$2", <Button value="Remove" />],
-			["Eggs", "$1", <Button value="Remove" />],
-			["Milk", "$2", <Button value="Remove" />],
-			["Eggs", "$1", <Button value="Remove" />],
-			["Milk", "$2", <Button value="Remove" />],
-			["Eggs", "$1", <Button value="Remove" />],
-			["Milk", "$2", <Button value="Remove" />],
-			["Eggs", "$1", <Button value="Remove" />],
-			["Milk", "$2", <Button value="Remove" />],
-			["Eggs", "$1", <Button value="Remove" />],
-			["Milk", "$2", <Button value="Remove" />],
-			["Eggs", "$1", <Button value="Remove" />],
-			["Milk", "$2", <Button value="Remove" />],
-			["Eggs", "$1", <Button value="Remove" />]
-		],
-		footer: ["Total: ", "$3", <Button value="Clear Cart" />]
-	}
+	footers = ["Total: ", "$3", <Button value="Clear Cart" />];
+
+	rows = [
+		["Milk", "$2", <Button value="Remove" />],
+		["Eggs", "$1", <Button value="Remove" />],
+		["Milk", "$2", <Button value="Remove" />],
+		["Eggs", "$1", <Button value="Remove" />]
+	];
 
 	render() {
 		return (
@@ -86,7 +56,7 @@ class SideBar extends React.Component {
 					<Button value="Sign Up" />
 				</LoginButtonWrapper>
 				<TableWrapper>
-					<Table title="Shopping Cart" data={this.someData} />
+					<Table title="Shopping Cart" headers={this.headers} footers={this.footers} rows={this.rows} />
 				</TableWrapper>
 				<BuyButtonWrapper>
 					<Button value="Buy Cart" />
