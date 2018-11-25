@@ -1,3 +1,7 @@
+import React from 'react';
+
+import HoverPopup from '../HoverPopup';
+
 // Defines food item data structure
 // Lists and exports all food items (by category)
 
@@ -86,14 +90,22 @@ const baseFoodItem = {
 // Helper functions for formatting data in the data structure
 function prettyCost(foodItem) {
 	const { cost = 0 } = foodItem;
-	return `${cost.toFixed(2)}`
-}
+	return `${cost.toFixed(2)}`;
+};
+
+function popupNutrition(foodItem) {
+	return (
+		<HoverPopup>
+			Nutrition Info
+		</HoverPopup>
+	);
+};
 
 // Lists of items.  Think of this as a database.
 
 const ALL_PROTIEN = {
 
-}
+};
 
 const WholeMilk = {
 	...baseFoodItem,
@@ -114,5 +126,5 @@ const ALL_SNACKS = {
 
 }
 
-export {PROTIEN, DAIRY, CARBS, SNACKS, prettyCategoryType};
-export { ALL_PROTIEN, ALL_DAIRY, ALL_CARBS, ALL_SNACKS };
+export { PROTIEN, DAIRY, CARBS, SNACKS, prettyCategoryType };
+export { ALL_PROTIEN, ALL_DAIRY, ALL_CARBS, ALL_SNACKS, prettyCost, popupNutrition };

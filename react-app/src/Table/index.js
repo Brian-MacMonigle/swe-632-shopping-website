@@ -2,7 +2,6 @@ import React from 'react';
 import Styled from 'styled-components';
 
 import { UnstyledButton } from '../Button';
-import HoverPopup from '../HoverPopup';
 
 const ComponentWrapper = Styled.div`
 	font-size: ${props => props.fontSize || "1em"};
@@ -63,7 +62,7 @@ class Table extends React.Component {
 			headers.push("");
 		}
 
-		while(footers.length != 0 && footers.length < headers.length) {
+		while(footers.length !== 0 && footers.length < headers.length) {
 			footers.push("");
 		}
 
@@ -123,7 +122,7 @@ class Table extends React.Component {
 
 class FoodTable extends React.Component {
 	render() {
-		const defaultHeaders = ["Name", "Cost", <HoverPopup >Nutritional Value</HoverPopup>];
+		const defaultHeaders = ["Name", "Cost", "Nutritional Info"];
 
 		return <Table headers={defaultHeaders} />;
 	}
