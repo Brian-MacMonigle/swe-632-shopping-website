@@ -40,11 +40,42 @@ const BuyButtonWrapper = Styled.div`
 class SideBar extends React.Component {
 
 	someData = {
-		headers: ["Item", "Cost"],
+		headers: ["Item", "Item Cost", "Remove Item"],
 		rows: [
-			["Milk", "$2"],
-			["Eggs", "$1"]
-		]
+			["Milk", "$2", <Button value="Remove" />],
+			["Eggs", "$1", <Button value="Remove" />],
+			["Milk", "$2", <Button value="Remove" />],
+			["Eggs", "$1", <Button value="Remove" />],
+			["Milk", "$2", <Button value="Remove" />],
+			["Eggs", "$1", <Button value="Remove" />],
+			["Milk", "$2", <Button value="Remove" />],
+			["Eggs", "$1", <Button value="Remove" />],
+			["Milk", "$2", <Button value="Remove" />],
+			["Eggs", "$1", <Button value="Remove" />],
+			["Milk", "$2", <Button value="Remove" />],
+			["Eggs", "$1", <Button value="Remove" />],
+			["Milk", "$2", <Button value="Remove" />],
+			["Eggs", "$1", <Button value="Remove" />],
+			["Milk", "$2", <Button value="Remove" />],
+			["Eggs", "$1", <Button value="Remove" />],
+			["Milk", "$2", <Button value="Remove" />],
+			["Eggs", "$1", <Button value="Remove" />],
+			["Milk", "$2", <Button value="Remove" />],
+			["Eggs", "$1", <Button value="Remove" />],
+			["Milk", "$2", <Button value="Remove" />],
+			["Eggs", "$1", <Button value="Remove" />],
+			["Milk", "$2", <Button value="Remove" />],
+			["Eggs", "$1", <Button value="Remove" />],
+			["Milk", "$2", <Button value="Remove" />],
+			["Eggs", "$1", <Button value="Remove" />],
+			["Milk", "$2", <Button value="Remove" />],
+			["Eggs", "$1", <Button value="Remove" />],
+			["Milk", "$2", <Button value="Remove" />],
+			["Eggs", "$1", <Button value="Remove" />],
+			["Milk", "$2", <Button value="Remove" />],
+			["Eggs", "$1", <Button value="Remove" />]
+		],
+		footer: ["Total: ", "$3", <Button value="Clear Cart" />]
 	}
 
 	render() {
@@ -55,10 +86,10 @@ class SideBar extends React.Component {
 					<Button value="Sign Up" />
 				</LoginButtonWrapper>
 				<TableWrapper>
-					<Table data={this.someData} />
+					<Table title="Shopping Cart" data={this.someData} />
 				</TableWrapper>
 				<BuyButtonWrapper>
-					<Button value="Buy" />
+					<Button value="Buy Cart" />
 				</BuyButtonWrapper>
 			</SideBarWrapper>
 		);

@@ -19,7 +19,7 @@ const DomPageWrapper = Styled.div`
 	justify-content: stretch;
 	align-content: stretch;
 
-	height: 100%;
+	max-height: 100vh;
 `;
 
 const HeaderWrapper = Styled.div`

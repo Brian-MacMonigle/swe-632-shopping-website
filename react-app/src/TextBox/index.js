@@ -18,7 +18,7 @@ class TextBox extends React.Component {
 			fontSize: "0.5em",
 			padding: "0.5em 0.75em",
 			borderRadius: "25px",
-			borderStyle: "solid"
+			borderStyle: "solid",
 		}
 
 		if(props.fontSize) {
