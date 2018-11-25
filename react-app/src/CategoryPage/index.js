@@ -8,6 +8,13 @@ const CategoryPageTitle = Styled.h1`
 	text-align: center;
 `;
 
+const TableWrapper = Styled.div`
+	padding: 1em;
+	padding-top: 0;
+	margin: 2em;
+	margin-top: 0;
+`;
+
 function getTableData(type) {
 	const convert = {
 		[PROTIEN]: ALL_PROTIEN,
@@ -16,7 +23,8 @@ function getTableData(type) {
 		[SNACKS]: ALL_SNACKS
 	}
 	return convert[type];
-}
+};
+
 
 class CategoryPage extends React.Component {
 	render() {
@@ -25,7 +33,9 @@ class CategoryPage extends React.Component {
 				<CategoryPageTitle>
 					{prettyCategoryType(this.props.type)}
 				</CategoryPageTitle>
-				<FoodTable options foodItems={getTableData(this.props.type)} />
+				<TableWrapper>
+					<FoodTable options foodItems={getTableData(this.props.type)} />
+				</TableWrapper>
 			</React.Fragment>
 		);
 	}
