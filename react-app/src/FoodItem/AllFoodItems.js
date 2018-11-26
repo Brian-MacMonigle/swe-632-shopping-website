@@ -76,7 +76,7 @@ const baseFoodItem = {
 	}
 }
 
-const Beef = {
+const beef = {
 	...baseFoodItem,
 	name: "Beef",
 	cost: 10,
@@ -91,7 +91,7 @@ const Beef = {
 	}
 }
 
-const Pork = {
+const pork = {
 	...baseFoodItem,
 	name: "Pork",
 	cost: 7,
@@ -106,7 +106,7 @@ const Pork = {
 	}
 }
 
-const Chicken = {
+const chicken = {
 	...baseFoodItem,
 	name: "Chicken",
 	cost: 5,
@@ -121,10 +121,144 @@ const Chicken = {
 	}
 }
 
+const bacon = {
+	...baseFoodItem,
+	name: "Bacon",
+	cost: 20,
+	nutrition: {
+		...baseFoodItem.nutrition,
+		servingSize: {
+			...baseFoodItem.nutrition.servingSize,
+			value: 30,
+			units: "oz",
+		},
+		calories: 2000
+	}
+}
+
+const ham = {
+	...baseFoodItem,
+	name: "Ham",
+	cost: 8,
+	nutrition: {
+		...baseFoodItem.nutrition,
+		servingSize: {
+			...baseFoodItem.nutrition.servingSize,
+			value: 5,
+			units: "oz",
+		},
+		calories: 50
+	}
+}
+
+const slicedHam = {
+	...baseFoodItem,
+	name: "Sliced Ham",
+	cost: 10,
+	nutrition: {
+		...baseFoodItem.nutrition,
+		servingSize: {
+			...baseFoodItem.nutrition.servingSize,
+			value: 3,
+			units: "oz",
+		},
+		calories: 30
+	}
+}
+
+const duck = {
+	...baseFoodItem,
+	name: "Ham",
+	cost: 12,
+	nutrition: {
+		...baseFoodItem.nutrition,
+		servingSize: {
+			...baseFoodItem.nutrition.servingSize,
+			value: 8,
+			units: "oz",
+		},
+		calories: 70
+	}
+}
+
 const ALL_PROTIEN = {
-	Beef,
-	Pork,
-	Chicken,
+	beef,
+	pork,
+	chicken,
+	bacon,
+	ham,
+	slicedHam,
+	duck,
+	turkey: {
+		...baseFoodItem,
+		name: "Turkey",
+		cost: 10,
+		nutrition: {
+			...baseFoodItem.nutrition,
+			servingSize: {
+				...baseFoodItem.nutrition.servingSize,
+				value: 3,
+				units: "oz",
+			},
+			calories: 30
+		}
+	},
+	sausage: {
+		...baseFoodItem,
+		name: "Sausage",
+		cost: 10,
+		nutrition: {
+			...baseFoodItem.nutrition,
+			servingSize: {
+				...baseFoodItem.nutrition.servingSize,
+				value: 3,
+				units: "oz",
+			},
+			calories: 30
+		}
+	},
+	lamb: {
+		...baseFoodItem,
+		name: "Lamb",
+		cost: 10,
+		nutrition: {
+			...baseFoodItem.nutrition,
+			servingSize: {
+				...baseFoodItem.nutrition.servingSize,
+				value: 3,
+				units: "oz",
+			},
+			calories: 30
+		}
+	},
+	hotDog: {
+		...baseFoodItem,
+		name: "Hot Dog",
+		cost: 0.5,
+		nutrition: {
+			...baseFoodItem.nutrition,
+			servingSize: {
+				...baseFoodItem.nutrition.servingSize,
+				value: 3,
+				units: "oz",
+			},
+			calories: 30
+		}
+	},
+	veal: {
+		...baseFoodItem,
+		name: "Veal",
+		cost: 13.3,
+		nutrition: {
+			...baseFoodItem.nutrition,
+			servingSize: {
+				...baseFoodItem.nutrition.servingSize,
+				value: 3,
+				units: "oz",
+			},
+			calories: 30
+		}
+	},
 };
 
 const wholeMilk = {
@@ -179,11 +313,108 @@ const ALL_DAIRY = {
 }
 
 const ALL_CARBS = {
-
+	lasagne: {
+		...baseFoodItem,
+		name: "Lasagne",
+		cost: 1,
+		nutrition: {
+			...baseFoodItem.nutrition,
+			servingSize: {
+				...baseFoodItem.nutrition.servingSize,
+				value: 8,
+				units: "sheets",
+			},
+			calories: 200
+		}
+	},
+	spaghetti: {
+		...baseFoodItem,
+		name: "Spaghetti",
+		cost: 1,
+		nutrition: {
+			...baseFoodItem.nutrition,
+			servingSize: {
+				...baseFoodItem.nutrition.servingSize,
+				value: 1,
+				units: "cup",
+			},
+			calories: 130
+		}
+	},
+	macaroni: {
+		...baseFoodItem,
+		name: "Macaroni",
+		cost: 1,
+		nutrition: {
+			...baseFoodItem.nutrition,
+			servingSize: {
+				...baseFoodItem.nutrition.servingSize,
+				value: 3,
+				units: "cups",
+			},
+			calories: 150
+		}
+	},
+	tagliatelle: {
+		...baseFoodItem,
+		name: "Tagliatelle",
+		cost: 1,
+		nutrition: {
+			...baseFoodItem.nutrition,
+			servingSize: {
+				...baseFoodItem.nutrition.servingSize,
+				value: 2.5,
+				units: "cups",
+			},
+			calories: 170
+		}
+	},
 }
 
 const ALL_SNACKS = {
+	whiteCholate: {
+		...baseFoodItem,
+		name: "White Chocolate",
+		cost: 1,
+		nutrition: {
+			...baseFoodItem.nutrition,
+			servingSize: {
+				...baseFoodItem.nutrition.servingSize,
+				value: 1,
+				units: "bar",
+			},
+			calories: 200
+		}
+	},
+	milkChocolate: {
+		...baseFoodItem,
+		name: "Milk Chocolate",
+		cost: 1,
+		nutrition: {
+			...baseFoodItem.nutrition,
+			servingSize: {
+				...baseFoodItem.nutrition.servingSize,
+				value: 1,
+				units: "bar",
+			},
+			calories: 225
+		}
+	},
+	healthySnack: {
+		...baseFoodItem,
+		name: "\"Health Food\"",
+		cost: 5,
+		nutrition: {
+			...baseFoodItem.nutrition,
+			servingSize: {
+				...baseFoodItem.nutrition.servingSize,
+				value: 1,
+				units: "food",
+			},
+			calories: 0
+		}
 
+	}
 }
 
 const ALL_FOOD = {

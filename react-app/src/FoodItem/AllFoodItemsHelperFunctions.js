@@ -1,6 +1,7 @@
 import React from 'react';
 import Styled from 'styled-components';
 import { map } from 'lodash';
+import uuid from 'uuid/v4';
 
 import HoverPopup from '../HoverPopup';
 
@@ -91,7 +92,6 @@ function nutritionPopup(foodItem) {
 
 		} = {}
 	} = foodItem;
-	console.log(foodItem);
 	const popup = (
 		<NutritionFactsWrapper>
 			<NutritionFactsTitle>
@@ -154,7 +154,7 @@ function nutritionPopup(foodItem) {
 			</DailyEntry>
 			<BigBlackBar />
 			{map(vitamins, ({name, value, units, daily}) => (
-				<DailyEntry>
+				<DailyEntry key={uuid()}>
 					<span>{`${name} ${value}${units}`}</span>
 					<span>{`${daily}%`}</span>
 				</DailyEntry>
@@ -165,7 +165,7 @@ function nutritionPopup(foodItem) {
 	)
 
 	return (
-		<HoverPopup popup={popup}>
+		<HoverPopup popup={popup} xOffset={10} yOffset={-200}>
 			Nutrition Info
 		</HoverPopup>
 	);

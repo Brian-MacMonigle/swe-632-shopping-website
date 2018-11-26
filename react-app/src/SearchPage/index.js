@@ -1,5 +1,5 @@
-import SearchPage from './SearchPage';
-import SearchBar from './SearchBar';
+import SearchPage, { searchFood } from './SearchPage';
+import SearchBar, { ControlledSearchBar } from './SearchBar';
 
 export default SearchPage;
-export { SearchBar };
+export { SearchBar, ControlledSearchBar, searchFood };

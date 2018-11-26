@@ -11,20 +11,29 @@ const SearchBoxWrapper = Styled.span`
 `;
 
 const ControlledSearchBar = withRouter((props) => {
-	const { history, searchValue = "", onType = () => {}, fontSize, onSearch = () => {} } = props;
+	const { 
+		history, 
+		searchValue = "", 
+		onType = () => {}, 
+		fontSize, 
+		onSearch = () => {}, 
+		searchButtonValue = "Search", 
+		searchOnEnter = true 
+	} = props;
+
 	return (
 		<SearchBoxWrapper>
 			<TextBox 
 				value={searchValue}
 				onChange={onType}
-				onEnter={() => onSearch(history)}
+				onEnter={() => searchOnEnter && onSearch(history)}
 				fontSize={fontSize}
 			/>
 			<Button					
 				onClick={() => onSearch(history)}
 				fontSize={fontSize || "0.5em"}
 			>
-				Search
+				{searchButtonValue}
 			</Button>
 		</SearchBoxWrapper>
 	);
@@ -50,7 +59,7 @@ class SearchBar extends React.Component {
 	}
 
 	render() {
-		const { props: { fontSize } } = this;
+		const { props: { fontSize, ...rest } } = this;
 
 		return (
 			<ControlledSearchBar
@@ -58,6 +67,7 @@ class SearchBar extends React.Component {
 				onType={this.onType}
 				onSearch={this.onSearch}
 				fontSize={fontSize || "0.5em"}
+				{...rest}
 			/>
 		);
 	}

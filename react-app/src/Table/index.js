@@ -1,6 +1,7 @@
 import React from 'react';
 import Styled from 'styled-components';
 import { sortBy, reduceRight, reverse } from 'lodash';
+import uuid from 'uuid/v4';
 
 import Button, { UnstyledButton } from '../Button';
 
@@ -170,7 +171,7 @@ class Table extends React.Component {
 				{headers.map((header, i) => 
 					// add button for sorting
 					sortable && !nonSortableHeaders.find(head => head === header) ? (
-						<TH key={`table-header-${i}`}>
+						<TH key={uuid()}>
 							<UnstyledButton onClick={() => this.sort(header)} >
 								{`${header} ${prettySortState((sort.find(({header: head}) => head === header) || {}).direction)}`}
 							</UnstyledButton>
@@ -187,7 +188,7 @@ class Table extends React.Component {
 		const htmlFooters = (
 			<TR>
 				{footers.map((footer, i) => (
-					<TD key={`table-footer-${i}`}>
+					<TD key={uuid()}>
 						{footer}
 					</TD>
 				))}
@@ -195,9 +196,9 @@ class Table extends React.Component {
 		);
 
 		const htmlRows = sortedRows.map((row, i) => (
-			<TR key={`table-row-${i}`}>
+			<TR key={uuid()}>
 				{row.map((data, j) => (
-					<TD key={`table-row-${i}-${j}`}>
+					<TD key={uuid()}>
 						{data}
 					</TD>
 				))}

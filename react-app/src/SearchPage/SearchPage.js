@@ -27,12 +27,12 @@ function getQueries(rawQueries = "") {
 	return res;
 }
 
-function searchFood(search) {
+function searchFood(food, search) {
 	const options = {
 		extract: (food) => food.name,
 	};
 
-	return searchAlg(search, values(ALL_FOOD), options).map(res => res.original);
+	return searchAlg(search, values(food), options).map(res => res.original);
 }
 
 class SearchPage extends React.Component {
@@ -65,7 +65,7 @@ class SearchPage extends React.Component {
 		// If searchValue not set yet, use url.  Otherwise use interal serachValue
 		const search = searchValue === null ? urlSearch : searchValue;
 
-		const searchResults = searchFood(search);
+		const searchResults = searchFood(ALL_FOOD, search);
 
 		return (
 			<React.Fragment>
@@ -91,3 +91,4 @@ class SearchPage extends React.Component {
 }
 
 export default SearchPage;
+export { searchFood };

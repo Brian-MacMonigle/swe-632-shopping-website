@@ -22,6 +22,8 @@ const DomPageWrapper = Styled.div`
 	justify-content: stretch;
 	align-content: stretch;
 
+	overflow-y: hidden;
+
 	height: 100vh;
 `;
 

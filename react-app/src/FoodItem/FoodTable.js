@@ -1,5 +1,6 @@
 import React from 'react';
 import { map } from 'lodash';
+import uuid from 'uuid/v4';
 
 import Table from '../Table';
 import Button from '../Button';
@@ -20,14 +21,14 @@ class FoodTable extends React.Component {
 	render() {
 		const { defaultProps = {}, props: { foodItems = [], ...rest} } = this;
 
-		const rows = map(foodItems, food => {
+		const rows = map(foodItems, (food, i) => {
 			const { name, cost } = food;
 			return [
 				name, 
 				prettyCost(cost), 
 				nutritionPopup(food), 
 				(
-					<Button 
+					<Button key={uuid()} 
 						onClick={() => this.onAdd(food)}
 					>
 						Add To Cart

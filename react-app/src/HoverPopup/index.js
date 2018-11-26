@@ -16,8 +16,8 @@ const PopupWrapper = Styled.div`
 	visibility: hidden;
 	position: absolute;
 	z-index: 1;
-	x: ${props => props.x || 0}px;
-	y: ${props => props.y || 0}px;
+	left: ${props => props.x || 0}px;
+	top: ${props => props.y || 0}px;
 `;
 
 class HoverPopup extends React.Component {
