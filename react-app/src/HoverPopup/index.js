@@ -11,6 +11,7 @@ const TextWrapper = Styled.span`
 	}
 `;
 
+// Seems to not be working.  But static works for Nutriton Info, so leaving it.
 const PopupWrapper = Styled.div`
 	visibility: hidden;
 	position: absolute;
