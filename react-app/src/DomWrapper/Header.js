@@ -2,6 +2,7 @@ import React from 'react';
 import Styled from 'styled-components';
 
 import LinkWrapper from '../LinkWrapper';
+import { PROTIEN, DAIRY, CARBS, SNACKS } from '../FoodItem';
 import Button from '../Button';
 
 const HeaderWrapper = Styled.div`
@@ -17,6 +18,23 @@ const ElementWrapper = Styled.span`
 	display: inline-block;
 	padding: 0.25em;
 	color: white;
+`;
+
+const HeaderHomeWrapper = Styled.span`
+	margin-right: 0.6em;
+
+	:hover {
+		text-decoration: underline;
+	}
+`;
+
+const HeaderLinkWrapper = Styled.span`
+	font-size: 0.7em;
+	margin: 0.3em;
+	
+	:hover {
+		text-decoration: underline;
+	}
 `;
 
 const UsernameWrapper = Styled.span`
@@ -50,9 +68,36 @@ class Header extends React.Component {
 		return (
 			<HeaderWrapper>
 				<ElementWrapper>
-					<LinkWrapper to="/">
-						Brian's Groceries
-					</LinkWrapper>
+					<HeaderHomeWrapper>
+						<LinkWrapper to="/">
+							Brian's Groceries
+						</LinkWrapper>
+					</HeaderHomeWrapper>
+					<HeaderLinkWrapper>
+						<LinkWrapper to={`/${PROTIEN}`}>
+							Meats
+						</LinkWrapper>
+					</HeaderLinkWrapper>
+					<HeaderLinkWrapper>
+						<LinkWrapper to={`/${DAIRY}`}>
+							Dairy
+						</LinkWrapper>
+					</HeaderLinkWrapper>
+					<HeaderLinkWrapper>
+						<LinkWrapper to={`/${CARBS}`}>
+							Carbs
+						</LinkWrapper>
+					</HeaderLinkWrapper>
+					<HeaderLinkWrapper>
+						<LinkWrapper to={`/${SNACKS}`}>
+							Snacks
+						</LinkWrapper>
+					</HeaderLinkWrapper>
+					<HeaderLinkWrapper>
+						<LinkWrapper to="/search">
+							Search
+						</LinkWrapper>
+					</HeaderLinkWrapper>
 				</ElementWrapper>
 				<ElementWrapper>
 					{loggedIn ? (
