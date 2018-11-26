@@ -88,7 +88,7 @@ function prettySortState(sortState) {
 // headers: same as props ([values])
 // hows: same as props ([[values]])
 // (each) sorting: { header: "in headers" direction: ASCENDING || DECENDING }
-// 	ex: { header: "Name", direction: DECENDING }.
+// 	ex: { header: "Name", direction: DECENDING, ?func: (initialRowValue) => toSortByValue }.
 function compoundSort(headers, rows, ...sorting) {
 	return reduceRight(
 		sorting, 
@@ -96,13 +96,17 @@ function compoundSort(headers, rows, ...sorting) {
 			if(!isModifyingSortState(headerAndDirection.direction)) {
 				return acc;
 			}
+			const sortFunc = headerAndDirection.func || (v => v);
 			const sorted = sortBy(
 				acc, 
 				(row) => 
-					row[headers.indexOf(headerAndDirection.header)],
+					sortFunc(row[headers.indexOf(headerAndDirection.header)]),
 				[],
 			);
-			return headerAndDirection.direction === DECENDING ? reverse(sorted) : sorted;
+
+			const res = headerAndDirection.direction === DECENDING ? reverse(sorted) : sorted;
+			console.log('compoundSort: ', sorted);
+			return res;
 		},
 		rows
 	);
@@ -115,8 +119,11 @@ class Table extends React.Component {
 	}
 
 	sort = (header) => {
-		this.setState((prevState) => {
+		this.setState((prevState, props) => {
 			const { sort } = prevState;
+			const { sortFunctions = {} } = props;
+
+			console.log(sortFunctions);
 
 			// remove old
 			const toRemove = sort.findIndex(({header: head}) => head === header);
@@ -125,8 +132,14 @@ class Table extends React.Component {
 				oldSort = sort.splice(toRemove, 1)[0];
 			}
 
+			const sortFunc = sortFunctions[header] || (v => v);
+
 			// add new
-			sort.unshift({ header, direction: nextSortState(oldSort.direction)});
+			sort.unshift({ 
+				header,
+				direction: nextSortState(oldSort.direction),
+				func: sortFunc,
+			});
 			return { sort };
 		});
 	}
@@ -143,14 +156,15 @@ class Table extends React.Component {
 				removeItem,
 			} = {}, 
 			state: { 
-				sort = [] 
+				sort = []
 			} = {} 
 		} = this;
 
 		if(clearButton) {
-			headers = headers.concat(clearButton.header);
-			nonSortableHeaders = nonSortableHeaders.concat(clearButton.header);
-			footers = footers.concat(<Button value={clearButton.value} onClick={clearButton.func} />);
+			const { header: clearHead, value: clearValue, func: clearFunc, ...rest } = clearButton;
+			headers = headers.concat(clearHead);
+			nonSortableHeaders = nonSortableHeaders.concat(clearHead);
+			footers = footers.concat(<Button value={clearValue} onClick={clearFunc} {...rest} />);
 		}
 
 		if(removeItem) {

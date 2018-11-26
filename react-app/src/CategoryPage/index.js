@@ -77,6 +77,7 @@ class CategoryPage extends React.Component {
 					searchValue={searchValue}
 					onType={this.onType}
 					onSearch={this.onSearch}
+					searchButtonValue="Search All"
 					searchOnEnter={false}
 				/>
 				<TableWrapper>

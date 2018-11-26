@@ -6,9 +6,11 @@ import Header from './Header';
 import SideBar from './SideBar';
 import Footer from './Footer';
 import PageNotFound from '../PageNotFound';
+import LoginPage, { SignUpPage } from '../LoginPage';
 import HomePage from '../HomePage';
 import CategoryPage from '../CategoryPage';
 import SearchPage from '../SearchPage';
+import BuyCartPage from '../BuyCartPage';
 import {PROTIEN, DAIRY, CARBS, SNACKS} from '../FoodItem';
 
 const DomPageWrapper = Styled.div`
@@ -81,6 +83,15 @@ class DomWrapper extends React.Component {
 		}));
 	}
 
+	updateLoginState = (username, loggedIn) => {
+		this.setState({
+			loginState: {
+				username,
+				loggedIn,
+			}
+		})
+	}
+
 	// The rest of DomWrapper
 	constructor(props) {
 		super(props);
@@ -91,13 +102,15 @@ class DomWrapper extends React.Component {
 	componentDidMount() {
 		this.setState({
 			shoppingCart: this.shoppingCart,
+			loginState: {},
 		})
 	}
 
 	render() {
 		const { 
 			state: { 
-				shoppingCart 
+				shoppingCart,
+				loginState,
 			} = {},
 			clearShoppingCart,
 			addItemToShoppingCart,
@@ -120,11 +133,20 @@ class DomWrapper extends React.Component {
 						<PageWrapper>
 							<Switch>
 								<Route exact path="/" component={HomePage} />
+								<Route path="/login" component={LoginPage} />
+								<Route path="/signup" component={SignUpPage} />
 								<Route path="/search" component={SearchPage} />
 								<Route path={`/${PROTIEN}`} render={() => <CategoryPage type={PROTIEN} addItemToShoppingCart={addItemToShoppingCart} />} />
 								<Route path={`/${DAIRY}`} render={() => <CategoryPage type={DAIRY} addItemToShoppingCart={addItemToShoppingCart} />} />
 								<Route path={`/${CARBS}`} render={() => <CategoryPage type={CARBS} addItemToShoppingCart={addItemToShoppingCart} />} />
 								<Route path={`/${SNACKS}`} render={() => <CategoryPage type={SNACKS} addItemToShoppingCart={addItemToShoppingCart} />} />
+								<Route path={`/buy`} render={() => 
+									<BuyCartPage 
+										shoppingCart={shoppingCart} 
+										removeItemFromShoppingCart={removeItemFromShoppingCart} 
+										clearShoppingCart={clearShoppingCart} 
+									/>}
+								/>
 								<Route path="/" component={PageNotFound} />
 							</Switch>
 						</PageWrapper>

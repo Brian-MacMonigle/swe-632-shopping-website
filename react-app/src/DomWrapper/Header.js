@@ -42,8 +42,12 @@ class Header extends React.Component {
 				</ElementWrapper>
 				<ElementWrapper>
 					<LoginButtonWrapper>
-						<Button value="Login" />
-						<Button value="Sign Up" />
+						<LinkWrapper to="/login" >
+							<Button value="Login" />
+						</LinkWrapper>
+						<LinkWrapper to="/signup" >
+							<Button value="Sign Up" />
+						</LinkWrapper>
 					</LoginButtonWrapper>
 				</ElementWrapper>
 			</HeaderWrapper>

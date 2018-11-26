@@ -41,6 +41,7 @@ class FoodTable extends React.Component {
 			<Table 
 				{...defaultProps}
 				{...rest}
+				sortFunctions={{"Cost": c => Number(c.slice(1))}}
 				rows={rows}
 			/>
 		);

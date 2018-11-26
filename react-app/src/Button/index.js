@@ -2,14 +2,14 @@ import React from 'react';
 import Styled from 'styled-components';
 
 const ButtonWrapper = Styled.span`
-	cursor: pointer;
+	cursor: ${props => props.disabled ? 'default' : 'pointer'};
 	margin: 10px;
 	padding: 0.5em 0.75em;
 
 	border: 1px solid ${props => props.borderColor || 'black'};
 	border-radius: 25px;
 	color: ${props => props.color || 'black'}
-	background-color: ${props => props.backgroundColor || 'springGreen'}
+	background-color: ${props => props.disabled ? 'lightGrey' : props.backgroundColor || 'springGreen'}
 	font-size: ${props => props.fontSize || 'inherit'}
 	white-space: nowrap;
 
@@ -19,7 +19,7 @@ const ButtonWrapper = Styled.span`
 	padding-right: 0.5em;
 
 	:active {
-		background-color: ${props => props.activeBackgroundColor || 'limeGreen'}
+		background-color: ${props => props.disabled ? 'lightGrey' : props.activeBackgroundColor || 'limeGreen'}
 	}
 `;
 
@@ -30,12 +30,13 @@ const UnstyledWrapper = Styled.span`
 class Button extends React.Component {
 	constructor(props) {
 		super(props);
-		this.onClick = props.onClick || (() => false);
+		this.onClick = (event) => !props.disabled && (props.onClick && props.onClick(event));
 	}
 
 	render() {
+		const { props: { disabled } = {} } = this;
 		return (
-			<ButtonWrapper 
+			<ButtonWrapper disabled={disabled}
 				onClick={this.onClick}
 				fontSize={this.props.fontSize}
 			>

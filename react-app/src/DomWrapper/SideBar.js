@@ -2,6 +2,7 @@ import React from 'react';
 import Styled from 'styled-components';
 
 import Button from '../Button';
+import LinkWrapper from '../LinkWrapper';
 import Table from '../Table';
 import { prettyCost } from '../FoodItem';
 
@@ -62,6 +63,7 @@ class SideBar extends React.Component {
 			header: "Remove Item",
 			value: "Clear Cart",
 			func: clearShoppingCart,
+			disabled: food.length === 0,
 		}
 
 		return (
@@ -76,10 +78,13 @@ class SideBar extends React.Component {
 						removeItem={removeItem}
 						clearButton={clearButton}
 						showNutrition={false}
+						sortFunctions={{"Cost": v => Number(v.slice(1)) }}
 					/>
 				</TableWrapper>
 				<BuyButtonWrapper>
-					<Button value="Buy Cart" />
+					<LinkWrapper to="buy" >
+						<Button value="Buy Cart" />
+					</LinkWrapper>
 				</BuyButtonWrapper>
 			</SideBarWrapper>
 		)
