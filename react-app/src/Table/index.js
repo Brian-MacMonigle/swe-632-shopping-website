@@ -1,5 +1,6 @@
 import React from 'react';
 import Styled from 'styled-components';
+import { sortBy, reduceRight, reverse } from 'lodash';
 
 import { UnstyledButton } from '../Button';
 
@@ -50,14 +51,86 @@ const TD = Styled.td`
 	text-align: center;
 `;
 
-class Table extends React.Component {
+const ASCENDING = 1;
+const DECENDING = -1;
+const NONE = 0;
 
-	onOptionsClick = (event) => {
+function nextSortState(currentSortState) {
+	// default case
+	if(currentSortState === undefined) {
+		return ASCENDING;
+	}
+	const convert = {
+		[ASCENDING]: DECENDING,
+		[DECENDING]: NONE,
+		[NONE]: ASCENDING
+	};
+	return convert[currentSortState];
+}
+
+function prettySortState(sortState) {
+	const convert = {
+		[ASCENDING]: '↑',
+		[DECENDING]: '↓'
+	};
+	return convert[sortState] || '-';
+}
+
+// Sorts in reverse order of sorting argument.  Aka, first one entered is the primary sort.
+// headers: same as props ([values])
+// hows: same as props ([[values]])
+// (each) sorting: { header: "in headers" direction: ASCENDING || DECENDING }
+// 	ex: { header: "Name", direction: DECENDING }.
+function compoundSort(headers, rows, ...sorting) {
+	console.log('compoundSort: ', '\nheaders: ', headers, '\nrows: ', rows, '\nsorting: ', sorting); 
+	return reduceRight(
+		sorting, 
+		(acc, headerAndDirection) => {
+			console.log('reduceRight: ', '\nacc: ', acc, '\nheaderAndDirection: ', headerAndDirection);
+			if(headerAndDirection.direction !== ASCENDING && headerAndDirection.direction !== DECENDING) {
+				return acc;
+			}
+			const sorted = sortBy(
+				acc, 
+				(row) => 
+					row[headers.indexOf(headerAndDirection.header)],
+				[],
+			);
+			const res = headerAndDirection.direction === DECENDING ? reverse(sorted) : sorted;
+			console.log('sorted: ', sorted);
+			return sorted;
+		},
+		rows
+	);
+}
+
+class Table extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {sort: []};
+	}
+
+	sort = (header) => {
+		this.setState((prevState) => {
+			const { sort } = prevState;
+
+			// remove old
+			const toRemove = sort.findIndex(({header: head}) => head === header);
+			let oldSort = {};
+			if(toRemove >= 0) {
+				oldSort = sort.splice(toRemove, 1)[0];
+			}
+
+			// add new
+			sort.unshift({ header, direction: nextSortState(oldSort.direction)});
+			return { sort };
+		});
 	}
 
 	render() {
-		const { headers = [], rows = [[]], footers = [], options } = this.props;
+		const { props: { headers = [], rows = [[]], footers = [], sortable, nonSortableHeaders = [] } = {}, state: { sort = [] } = {} } = this;
 
+		// Headers and footers are same lenght (looks weird if not)
 		while(headers.length < footers.length) {
 			headers.push("");
 		}
@@ -66,18 +139,48 @@ class Table extends React.Component {
 			footers.push("");
 		}
 
-		if(options) {
-			headers.unshift((
-				<UnstyledButton 
-					onClick={this.onOptionsClick}
-				>
-					*
-				</UnstyledButton>
-			));
-			if(footers.length > 0) {
-				footers.unshift("");
-			}
-		}
+		// Sort
+		const sortedRows = compoundSort(headers, rows, ...this.state.sort);
+
+		// Rendering
+		const htmlHeaders = (
+			<TR>
+				{headers.map((header, i) => 
+					// add button for sorting
+					sortable && !nonSortableHeaders.find(head => head === header) ? (
+						<TH key={`table-header-${i}`}>
+							<UnstyledButton onClick={() => this.sort(header)} >
+								{`${header} ${prettySortState((sort.find(({header: head}) => head === header) || {}).direction)}`}
+							</UnstyledButton>
+						</TH>
+					) : (
+						<TH key={`table-header-${i}`}>
+							{header}
+						</TH>
+					)
+				)}
+			</TR>
+		);
+
+		const htmlFooters = (
+			<TR>
+				{footers.map((footer, i) => (
+					<TD key={`table-footer-${i}`}>
+						{footer}
+					</TD>
+				))}
+			</TR>
+		);
+
+		const htmlRows = sortedRows.map((row, i) => (
+			<TR key={`table-row-${i}`}>
+				{row.map((data, j) => (
+					<TD key={`table-row-${i}-${j}`}>
+						{data}
+					</TD>
+				))}
+			</TR>
+		));
 
 		return (
 			<ComponentWrapper fontSize={this.props.fontSize} >
@@ -86,33 +189,13 @@ class Table extends React.Component {
 				</TitleWrapper>
 				<TableWrapper>
 					<Thead>
-						<TR>
-							{headers.map((header, i) => (
-								<TH key={`table-header-${i}`}>
-									{header}
-								</TH>
-							))}
-						</TR>
+						{htmlHeaders}
 					</Thead>
 					<Tbody>
-						{rows.map((row, i) => (
-							<TR key={`table-row-${i}`}>
-								{row.map((data, j) => (
-									<TD key={`table-row-${i}-${j}`}>
-										{data}
-									</TD>
-								))}
-							</TR>
-						))}
+						{htmlRows}
 					</Tbody>
 					<Tfoot>
-						<TR>
-							{footers.map((footer, i) => (
-								<TD key={`table-footer-${i}`}>
-									{footer}
-								</TD>
-							))}
-						</TR>
+						{htmlFooters}
 					</Tfoot>
 				</TableWrapper>
 			</ComponentWrapper>
@@ -120,13 +203,4 @@ class Table extends React.Component {
 	}
 }
 
-class FoodTable extends React.Component {
-	render() {
-		const defaultHeaders = ["Name", "Cost", "Nutritional Info"];
-
-		return <Table headers={defaultHeaders} />;
-	}
-}
-
 export default Table;
-export { FoodTable };

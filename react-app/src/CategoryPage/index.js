@@ -1,7 +1,7 @@
 import React from 'react';
 import Styled from 'styled-components';
 
-import { FoodTable } from '../Table';
+import { FoodTable } from '../FoodItem';
 import { prettyCategoryType, PROTIEN, DAIRY, CARBS, SNACKS, ALL_PROTIEN, ALL_DAIRY, ALL_CARBS, ALL_SNACKS } from '../FoodItem';
 
 const CategoryPageTitle = Styled.h1`
@@ -24,7 +24,6 @@ function getTableData(type) {
 	}
 	return convert[type];
 };
-
 
 class CategoryPage extends React.Component {
 	render() {

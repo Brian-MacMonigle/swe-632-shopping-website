@@ -56,7 +56,14 @@ class SideBar extends React.Component {
 					<Button value="Sign Up" />
 				</LoginButtonWrapper>
 				<TableWrapper>
-					<Table title="Shopping Cart" headers={this.headers} footers={this.footers} rows={this.rows} />
+					<Table 
+						title="Shopping Cart" 
+						headers={this.headers} 
+						footers={this.footers} 
+						rows={this.rows} 
+						sortable
+						nonSortableHeaders={["Remove Item"]}
+					/>
 				</TableWrapper>
 				<BuyButtonWrapper>
 					<Button value="Buy Cart" />
