@@ -10,20 +10,32 @@ const SearchBoxWrapper = Styled.span`
 	justify-content: center;
 `;
 
+const ControlledSearchBar = withRouter((props) => {
+	const { history, searchValue, onType, fontSize, onSearch = () => {} } = props;
+	return (
+		<SearchBoxWrapper>
+			<TextBox 
+				value={searchValue}
+				onChange={onType}
+				onEnter={() => onSearch(history)}
+				fontSize={fontSize}
+			/>
+			<Button					
+				onClick={() => onSearch(history)}
+				fontSize={fontSize || "0.5em"}
+			>
+				Search
+			</Button>
+		</SearchBoxWrapper>
+	);
+});
+
 class SearchBar extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			searchValue: props.initSearchValue || "",
 		}
-		this.SearchButton = withRouter(({ history }) => (
-			<Button
-				onClick={() => this.onSearch(history)}
-				fontSize={this.props.fontSize || "0.5em"}
-			>
-				Search
-			</Button>
-		));
 	}
 
 	onType = (event) => {
@@ -31,31 +43,25 @@ class SearchBar extends React.Component {
 	}
 
 	onSearch = (history) => {
-		if(this.state.searchValue.length !== 0) {
-			console.log(`You have search for '${this.state.searchValue}'`);
-			history.push(`/search/?search=${this.state.searchValue}`)
+		const { state: { searchValue = "" }} = this;
+		if(history && searchValue.length > 0) {
+			history.push(`/search/?search=${searchValue}`)
 		}
 	}
 
 	render() {
-		const { SearchButton } = this;
+		const { props: { fontSize } } = this;
+
 		return (
-			<SearchBoxWrapper>
-				<TextBox 
-					value={this.state.searchValue}
-					onChange={this.onType}
-					onEnter={this.onSearch}
-					fontSize={this.props.fontSize}
-				/>
-				<SearchButton					
-					onClick={this.onSearch}
-					fontSize={this.props.fontSize || "0.5em"}
-				>
-					Search
-				</SearchButton>
-			</SearchBoxWrapper>
+			<ControlledSearchBar
+				searchValue={this.state.searchValue}
+				onType={this.onType}
+				onSearch={this.onSearch}
+				fontSize={fontSize || "0.5em"}
+			/>
 		);
 	}
 }
 
 export default SearchBar;
+export { ControlledSearchBar };

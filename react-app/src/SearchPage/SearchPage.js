@@ -1,12 +1,10 @@
 import React from 'react';
 import Styled from 'styled-components';
+import { values } from 'lodash';
+import { filter as searchAlg } from 'fuzzy';
 
 import SearchBar from './SearchBar';
 import { ALL_FOOD, FoodTable } from '../FoodItem';
-
-const SearchPageTitle = Styled.h1`
-	text-align: center;
-`;
 
 const TableWrapper = Styled.div`
 	padding: 1em;
@@ -25,6 +23,14 @@ function getQueries(rawQueries = "") {
 	return res;
 }
 
+function searchFood(search) {
+	const options = {
+		extract: (food) => food.name,
+	};
+
+	return searchAlg(search, values(ALL_FOOD), options).map(res => res.original);
+}
+
 class SearchPage extends React.Component {
 	render() {
 		const { props: { location: { search: rawQuery = "" } = {} } = {} } = this;
@@ -32,7 +38,9 @@ class SearchPage extends React.Component {
 		const queries = getQueries(rawQuery.slice(1, rawQuery.length));
 		const { search = "" } = queries;
 
-		console.log('SearchPage: ', this, 'rawQuery: ', rawQuery, '\nqueries: ', queries, '\nsearch: ', search);
+		console.log('SearchPage: ', this, 'rawQuery: ', rawQuery, '\nqueries: ', queries, '\nsearch: ', search, '\nALL_FOOD', ALL_FOOD);
+
+		const searchResults = searchFood(search);
 
 		return (
 			<React.Fragment>
@@ -42,8 +50,8 @@ class SearchPage extends React.Component {
 				/>
 				<TableWrapper>
 					<FoodTable 
-						foodItems={ALL_FOOD}
-						onAdd={(food) => console.log('Add food: ', food)}
+						foodItems={searchResults}
+						onAdd={(food) => console.log('Add food: ', food, rawQuery)}
 						sortable
 					/>
 				</TableWrapper>

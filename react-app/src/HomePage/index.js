@@ -60,7 +60,7 @@ class HomePage extends React.Component {
 		return (
 			<HomePageWrapper>
 				<CategoryContainerTitle>
-					Search by Category
+					Browse by Category
 				</CategoryContainerTitle>
 				<CategoryContainer>
 					<Category category={PROTIEN} />
