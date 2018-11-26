@@ -84,12 +84,13 @@ class DomWrapper extends React.Component {
 	}
 
 	updateLoginState = (username, loggedIn) => {
-		this.setState({
+		this.setState(prevState => ({
 			loginState: {
 				username,
 				loggedIn,
-			}
-		})
+			},
+			shoppingCart: loggedIn ? prevState.shoppingCart : this.shoppingCart,
+		}));
 	}
 
 	updateAddress = (address) => {
