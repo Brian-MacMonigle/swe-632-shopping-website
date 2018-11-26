@@ -2,7 +2,6 @@ import React from 'react';
 import Styled from 'styled-components';
 
 import LinkWrapper from '../LinkWrapper';
-import { SearchBar } from '../SearchPage';
 
 const HeaderWrapper = Styled.div`
 	display: flex;
@@ -27,9 +26,6 @@ class Header extends React.Component {
 					<LinkWrapper to="/">
 						Brian's Groceries
 					</LinkWrapper>
-				</ElementWrapper>
-				<ElementWrapper>
-					<SearchBar />
 				</ElementWrapper>
 			</HeaderWrapper>
 		);
