@@ -34,13 +34,15 @@ class TextBox extends React.Component {
 	}
 
 	render() {
+		const { props: { password, value } } = this;
 		return (
 			<TextBoxWrapper>
 				<input
 					style={this.TextBoxStyle}
-					value={this.props.value}
+					value={value}
 					onChange={this.onChange}
 					onKeyPress={this.onKeyPress}
+					type={password ? 'password' : 'text'}
 				/>
 			</TextBoxWrapper>
 		);

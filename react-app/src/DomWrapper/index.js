@@ -92,6 +92,12 @@ class DomWrapper extends React.Component {
 		})
 	}
 
+	updateAddress = (address) => {
+		this.setState({
+			address,
+		})
+	}
+
 	// The rest of DomWrapper
 	constructor(props) {
 		super(props);
@@ -103,6 +109,7 @@ class DomWrapper extends React.Component {
 		this.setState({
 			shoppingCart: this.shoppingCart,
 			loginState: {},
+			address: {},
 		})
 	}
 
@@ -111,10 +118,13 @@ class DomWrapper extends React.Component {
 			state: { 
 				shoppingCart,
 				loginState,
+				address,
 			} = {},
 			clearShoppingCart,
 			addItemToShoppingCart,
 			removeItemFromShoppingCart,
+			updateLoginState,
+			updateAddress,
 		} = this;
 		return (
 			<BrowserRouter>
@@ -128,13 +138,14 @@ class DomWrapper extends React.Component {
 								shoppingCart={shoppingCart}
 								clearShoppingCart={clearShoppingCart}
 								removeItemFromShoppingCart={removeItemFromShoppingCart}
+								loginState={loginState}
 							/>
 						</SideBarWrapper>
 						<PageWrapper>
 							<Switch>
 								<Route exact path="/" component={HomePage} />
-								<Route path="/login" component={LoginPage} />
-								<Route path="/signup" component={SignUpPage} />
+								<Route path="/login" render={() => <LoginPage loginState={loginState} updateLoginState={updateLoginState} />} />
+								<Route path="/signup" render={() => <SignUpPage loginState={loginState} updateLoginState={updateLoginState} />} />
 								<Route path="/search" component={SearchPage} />
 								<Route path={`/${PROTIEN}`} render={() => <CategoryPage type={PROTIEN} addItemToShoppingCart={addItemToShoppingCart} />} />
 								<Route path={`/${DAIRY}`} render={() => <CategoryPage type={DAIRY} addItemToShoppingCart={addItemToShoppingCart} />} />
@@ -144,7 +155,10 @@ class DomWrapper extends React.Component {
 									<BuyCartPage 
 										shoppingCart={shoppingCart} 
 										removeItemFromShoppingCart={removeItemFromShoppingCart} 
-										clearShoppingCart={clearShoppingCart} 
+										clearShoppingCart={clearShoppingCart}
+										loginState={loginState}
+										address={address}
+										updateAddress={updateAddress}
 									/>}
 								/>
 								<Route path="/" component={PageNotFound} />

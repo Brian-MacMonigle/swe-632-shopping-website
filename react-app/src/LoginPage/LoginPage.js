@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import Styled from 'styled-components';
 
 import TextBox from '../TextBox';
@@ -30,12 +31,32 @@ const ButtonWrapper = Styled.div`
 	margin: auto;
 `;
 
+const ErrorMessage = Styled.div`
+	color: red;
+	text-align: center;
+	margin: 0 2em;
+	padding: 1em;
+`
+
 class LoginPage extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			attemptLogin: false,
+		}
+	}
+
+	login = () => {
+		this.setState({
+			attemptLogin: true,
+		})
 	}
 
 	render() {
+		const { state: { attemptLogin } = {}, props: { loginState } } = this;
+		if(loginState && loginState.loggedIn) {
+			return <Redirect to="/" />;
+		}
 		return (
 			<React.Fragment>
 				<Title>
@@ -54,6 +75,18 @@ class LoginPage extends React.Component {
 				<ButtonWrapper>
 					<Button value="Log In" onClick={this.login} />
 				</ButtonWrapper>
+				{
+					attemptLogin && (
+						<React.Fragment>
+						<ErrorMessage>
+							The Username and Password combination does not match our records.  Please try again.
+						</ErrorMessage>
+						<ErrorMessage>
+							* Note: there is no database set up to remember logins because this is a sample website
+						</ErrorMessage>
+						</React.Fragment>
+					)
+				}
 			</React.Fragment>
 		);
 	}
