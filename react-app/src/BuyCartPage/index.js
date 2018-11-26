@@ -9,6 +9,10 @@ const Title = Styled.h1`
 	text-align: center;
 `;
 
+const TableWrapper = Styled.div`
+	margin: 3em;
+`;
+
 const ButtonWrapper = Styled.div`
 	font-size: 2em;
 	padding: 1em;
@@ -64,17 +68,19 @@ class BuyCartPage extends React.Component {
 				<Title>
 					Shopping Cart
 				</Title>
-				<Table
-					title="Shopping Cart" 
-					headers={headers}
-					footers={footers}
-					rows={this.parseFood()}
-					sortable
-					removeItem={removeItem}
-					clearButton={clearButton}
-					showNutrition={false}
-					sortFunctions={{"Cost": v => Number(v.slice(1)) }}
-				/>
+				<TableWrapper>
+					<Table
+						title="Shopping Cart" 
+						headers={headers}
+						footers={footers}
+						rows={this.parseFood()}
+						sortable
+						removeItem={removeItem}
+						clearButton={clearButton}
+						showNutrition={false}
+						sortFunctions={{"Cost": v => Number(v.slice(1)) }}
+					/>
+				</TableWrapper>
 				<ButtonWrapper>
 					<Button
 						value="Proceed to Checkout"

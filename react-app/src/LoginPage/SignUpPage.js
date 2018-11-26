@@ -36,6 +36,7 @@ const ErrorMessage = Styled.div`
 	text-align: center;
 	margin: 0 2em;
 	padding: 1em;
+	font-weight: bold;
 `
 
 
@@ -84,7 +85,6 @@ class SignUpPage extends React.Component {
 	}
 
 	onType = (pass, index) => {
-		console.log('onType: ', '\npass: ', pass, '\nindex: ', index);
 		this.setState(prevState => {
 			const psudoState = {
 				...prevState, 
@@ -170,6 +170,9 @@ class SignUpPage extends React.Component {
 						</React.Fragment>
 					)
 				}
+				<ErrorMessage>
+					Never enter a real password on this sight.  I recomend 'abc' or something similar
+				</ErrorMessage>
 			</React.Fragment>
 		);
 	}

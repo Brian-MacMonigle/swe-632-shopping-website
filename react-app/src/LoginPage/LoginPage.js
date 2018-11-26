@@ -36,6 +36,7 @@ const ErrorMessage = Styled.div`
 	text-align: center;
 	margin: 0 2em;
 	padding: 1em;
+	font-weight: bold;
 `
 
 class LoginPage extends React.Component {
@@ -66,11 +67,11 @@ class LoginPage extends React.Component {
 					<TextWrapper>
 						Username: 
 					</TextWrapper>
-					<TextBox fontSize="0.6em" />
+					<TextBox fontSize="0.6em" onEnter={this.login} />
 					<TextWrapper>
 						Password:
 					</TextWrapper>
-					<TextBox fontSize="0.6em" password />
+					<TextBox fontSize="0.6em" password onEnter={this.login} />
 				</InputWrapper>
 				<ButtonWrapper>
 					<Button value="Log In" onClick={this.login} />
@@ -82,11 +83,14 @@ class LoginPage extends React.Component {
 							The Username and Password combination does not match our records.  Please try again.
 						</ErrorMessage>
 						<ErrorMessage>
-							* Note: there is no database set up to remember logins because this is a sample website
+							* Note: there is no database set up to remember Username and Passwords because this is a sample website
 						</ErrorMessage>
 						</React.Fragment>
 					)
 				}
+				<ErrorMessage>
+					Never enter a real password on this sight.  I recomend 'abc' or something similar
+				</ErrorMessage>
 			</React.Fragment>
 		);
 	}

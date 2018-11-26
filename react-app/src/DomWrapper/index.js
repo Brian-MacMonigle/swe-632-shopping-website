@@ -104,7 +104,6 @@ class DomWrapper extends React.Component {
 		this.state = {}; // to allow easy object deconstruction
 	}
 
-
 	componentDidMount() {
 		this.setState({
 			shoppingCart: this.shoppingCart,
@@ -131,7 +130,7 @@ class DomWrapper extends React.Component {
 				<React.Fragment>
 					<DomPageWrapper>
 						<HeaderWrapper>
-							<Header />
+							<Header loginState={loginState} updateLoginState={updateLoginState} />
 						</HeaderWrapper>
 						<SideBarWrapper>
 							<SideBar 

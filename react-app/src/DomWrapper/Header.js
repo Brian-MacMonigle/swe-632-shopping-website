@@ -19,8 +19,9 @@ const ElementWrapper = Styled.span`
 	color: white;
 `;
 
+const UsernameWrapper = Styled.span``
 
-const LoginButtonWrapper = Styled.div`
+const LoginWrapper = Styled.div`
 	font-size: 0.5em;
 
 	display: flex;
@@ -32,7 +33,18 @@ const LoginButtonWrapper = Styled.div`
 `;
 
 class Header extends React.Component {
+
+	logout = () => {
+		const { props: { updateLoginState } = {} } = this;
+		if(updateLoginState) {
+			updateLoginState("", false);
+		}
+	}
+
 	render() {
+		console.log('header: ', this);
+		const { props: { loginState: { username = "", loggedIn } = {} } = {} } = this;
+		console.log('username: ', username, loggedIn);
 		return (
 			<HeaderWrapper>
 				<ElementWrapper>
@@ -41,14 +53,24 @@ class Header extends React.Component {
 					</LinkWrapper>
 				</ElementWrapper>
 				<ElementWrapper>
-					<LoginButtonWrapper>
-						<LinkWrapper to="/login" >
-							<Button value="Login" />
-						</LinkWrapper>
-						<LinkWrapper to="/signup" >
-							<Button value="Sign Up" />
-						</LinkWrapper>
-					</LoginButtonWrapper>
+					{loggedIn ? (
+						<LoginWrapper>
+							<UsernameWrapper>
+								{`Welcome ${username}!`}
+							</UsernameWrapper>
+							<Button value="Logout" onClick={this.logout} />
+						</LoginWrapper>
+					) : (
+						<LoginWrapper>
+							<LinkWrapper to="/login" >
+								<Button value="Login" />
+							</LinkWrapper>
+							<LinkWrapper to="/signup" >
+								<Button value="Sign Up" />
+							</LinkWrapper>
+						</LoginWrapper>
+					)}
+					
 				</ElementWrapper>
 			</HeaderWrapper>
 		);
