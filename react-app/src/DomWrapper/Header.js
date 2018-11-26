@@ -62,9 +62,7 @@ class Header extends React.Component {
 	}
 
 	render() {
-		console.log('header: ', this);
 		const { props: { loginState: { username = "", loggedIn } = {} } = {} } = this;
-		console.log('username: ', username, loggedIn);
 		return (
 			<HeaderWrapper>
 				<ElementWrapper>

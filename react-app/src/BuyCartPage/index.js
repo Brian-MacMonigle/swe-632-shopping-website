@@ -36,18 +36,16 @@ class BuyCartPage extends React.Component {
 	parseFood = () => {
 		const { props: { shoppingCart: { food = [] } = {} } = {} } = this;
 		return food.map((foodItem) => ([
-			foodItem.name,
+			nutritionPopup(foodItem, foodItem.name),
 			prettyCost(foodItem.cost),
-			nutritionPopup(foodItem)
 		]));
 	}
 
 	render() {
-		console.log('BuyCartPage: ', this);
 		const { props: { removeItemFromShoppingCart, clearShoppingCart, shoppingCart: { food = [] } = {} } = {} } = this;
 
-		const headers = ["Item", "Cost", "Nutrition Info"];
-		const footers = ["Total", this.getTotal(), ""];
+		const headers = ["Item", "Cost"];
+		const footers = ["Total", this.getTotal()];
 
 		const removeItem = {
 			header: "Remove Item",
@@ -73,7 +71,6 @@ class BuyCartPage extends React.Component {
 						title="Shopping Cart" 
 						headers={headers}
 						footers={footers}
-						nonSortableHeaders={['Nutrition Info']}
 						rows={this.parseFood()}
 						sortable
 						removeItem={removeItem}
