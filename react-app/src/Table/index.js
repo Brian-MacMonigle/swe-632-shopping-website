@@ -27,6 +27,11 @@ const TableWrapper = Styled.table`
 `;
 
 const Thead = Styled.thead`
+	background-color: Gainsboro;
+`;
+
+const SortableHeader = Styled.span`
+	color: blue;
 `;
 
 const Tbody = Styled.tbody`
@@ -39,6 +44,10 @@ const Tfoot = Styled.tfoot`
 
 const TR = Styled.tr`
 	border: 1px solid black;
+
+	:hover {
+		background-color: #EFEFEF;
+	}
 `;
 
 const TH = Styled.th`
@@ -187,7 +196,9 @@ class Table extends React.Component {
 					sortable && !nonSortableHeaders.find(head => head === header) ? (
 						<TH key={uuid()}>
 							<UnstyledButton onClick={() => this.sort(header)} >
-								{`${header} ${prettySortState((sort.find(({header: head}) => head === header) || {}).direction)}`}
+								<SortableHeader>
+									{`${header} ${prettySortState((sort.find(({header: head}) => head === header) || {}).direction)}`}
+								</SortableHeader>
 							</UnstyledButton>
 						</TH>
 					) : (

@@ -69,7 +69,7 @@ class HomePage extends React.Component {
 					<Category category={SNACKS} />
 				</CategoryContainer>
 				<CenterTextWrapper>
-					<h1>Search the store</h1>
+					<h1>Search the Store</h1>
 				</CenterTextWrapper>
 				<SearchBar fontSize={"2em"}/>
 			</HomePageWrapper>

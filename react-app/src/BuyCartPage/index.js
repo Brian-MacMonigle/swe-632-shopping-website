@@ -73,11 +73,11 @@ class BuyCartPage extends React.Component {
 						title="Shopping Cart" 
 						headers={headers}
 						footers={footers}
+						nonSortableHeaders={['Nutrition Info']}
 						rows={this.parseFood()}
 						sortable
 						removeItem={removeItem}
 						clearButton={clearButton}
-						showNutrition={false}
 						sortFunctions={{"Cost": v => Number(v.slice(1)) }}
 					/>
 				</TableWrapper>
@@ -88,7 +88,7 @@ class BuyCartPage extends React.Component {
 					/>
 				</ButtonWrapper>
 				<TextWrapper>
-					* Note that the procede to checkout button will never work because this is not a real website.  This button would take you to a third party buy page (like paypal).
+					* Note that the proceed to checkout button will never work because this is not a real website.  This button would take you to a third party buy page (like paypal).
 				</TextWrapper>
 			</React.Fragment>
 		);

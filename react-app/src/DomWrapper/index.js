@@ -146,7 +146,7 @@ class DomWrapper extends React.Component {
 								<Route exact path="/" component={HomePage} />
 								<Route path="/login" render={() => <LoginPage loginState={loginState} updateLoginState={updateLoginState} />} />
 								<Route path="/signup" render={() => <SignUpPage loginState={loginState} updateLoginState={updateLoginState} />} />
-								<Route path="/search" component={SearchPage} />
+								<Route path="/search" render={() => <SearchPage addItemToShoppingCart={addItemToShoppingCart} /> } />
 								<Route path={`/${PROTIEN}`} render={() => <CategoryPage type={PROTIEN} addItemToShoppingCart={addItemToShoppingCart} />} />
 								<Route path={`/${DAIRY}`} render={() => <CategoryPage type={DAIRY} addItemToShoppingCart={addItemToShoppingCart} />} />
 								<Route path={`/${CARBS}`} render={() => <CategoryPage type={CARBS} addItemToShoppingCart={addItemToShoppingCart} />} />

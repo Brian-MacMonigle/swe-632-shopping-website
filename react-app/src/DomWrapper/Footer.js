@@ -28,7 +28,7 @@ class Footer extends React.Component {
 					The website will perform best in Chrome on a Computer (no phones or tablets)
 				</P>
 				<P>
-					* Most numbers are made up and should not be used as diatery advice
+					* Most numbers are made up and should not be used as dietary advice
 				</P>
 			</FooterWrapper>
 		);

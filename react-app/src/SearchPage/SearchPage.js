@@ -55,7 +55,7 @@ class SearchPage extends React.Component {
 	}
 
 	render() {
-		const { state: { searchValue } = {}, props: { location: { search: rawQuery = "" } = {} } = {} } = this;
+		const { state: { searchValue } = {}, props: { location: { search: rawQuery = "" } = {}, addItemToShoppingCart } = {} } = this;
 
 		// Get the urlSearch
 		// Need to remove the '?' at the beginning of the query
@@ -81,7 +81,7 @@ class SearchPage extends React.Component {
 				<TableWrapper>
 					<FoodTable 
 						foodItems={searchResults}
-						onAdd={(food) => console.log('Add food: ', food, rawQuery)}
+						onAdd={(food) => addItemToShoppingCart(food)}
 						sortable
 					/>
 				</TableWrapper>

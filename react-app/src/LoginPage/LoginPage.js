@@ -89,7 +89,7 @@ class LoginPage extends React.Component {
 					)
 				}
 				<ErrorMessage>
-					Never enter a real password on this sight.  I recomend 'abc' or something similar
+					Never enter a real password on this site.  I recomend 'abc' or something similar.
 				</ErrorMessage>
 			</React.Fragment>
 		);

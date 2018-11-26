@@ -1,4 +1,5 @@
 import React from 'react';
+import Styled from 'styled-components';
 import { map } from 'lodash';
 import uuid from 'uuid/v4';
 
@@ -6,10 +7,14 @@ import Table from '../Table';
 import Button from '../Button';
 import { prettyCost, nutritionPopup } from './AllFoodItemsHelperFunctions';
 
+const AddButtonWrapper = Styled.span`
+	max-width: 100px;
+`;
+
 class FoodTable extends React.Component {
 	static defaultProps = {
-			headers: ["Name", "Cost", "Nutritional Info", "Add To Cart"],
-			nonSortableHeaders: ["Nutritional Info", "Add To Cart"]
+			headers: ["Name", "Cost", "Add To Cart"],
+			nonSortableHeaders: ["Add To Cart"]
 	}
 
 	onAdd = (food) => {
@@ -24,15 +29,16 @@ class FoodTable extends React.Component {
 		const rows = map(foodItems, (food, i) => {
 			const { name, cost } = food;
 			return [
-				name, 
+				nutritionPopup(food, name), 
 				prettyCost(cost), 
-				nutritionPopup(food), 
 				(
-					<Button key={uuid()} 
-						onClick={() => this.onAdd(food)}
-					>
-						Add To Cart
-					</Button>
+					<AddButtonWrapper>
+						<Button key={uuid()} 
+							onClick={() => this.onAdd(food)}
+						>
+							Add To Cart
+						</Button>
+					</AddButtonWrapper>
 				)
 			];
 		})

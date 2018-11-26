@@ -77,7 +77,7 @@ function prettyCost(cost = 0) {
 	return `$${cost.toFixed(2)}`;
 };
 
-function nutritionPopup(foodItem) {
+function nutritionPopup(foodItem, child) {
 	const { 
 		nutrition: { 
 			servingsPerContainer, 
@@ -166,7 +166,7 @@ function nutritionPopup(foodItem) {
 
 	return (
 		<HoverPopup popup={popup} xOffset={10} yOffset={-200}>
-			Nutrition Info
+			{child}
 		</HoverPopup>
 	);
 };
