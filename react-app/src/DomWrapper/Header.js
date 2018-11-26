@@ -19,7 +19,9 @@ const ElementWrapper = Styled.span`
 	color: white;
 `;
 
-const UsernameWrapper = Styled.span``
+const UsernameWrapper = Styled.span`
+	text-align: center;
+`
 
 const LoginWrapper = Styled.div`
 	font-size: 0.5em;
