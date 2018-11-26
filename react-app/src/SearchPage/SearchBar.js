@@ -11,7 +11,7 @@ const SearchBoxWrapper = Styled.span`
 `;
 
 const ControlledSearchBar = withRouter((props) => {
-	const { history, searchValue, onType, fontSize, onSearch = () => {} } = props;
+	const { history, searchValue = "", onType = () => {}, fontSize, onSearch = () => {} } = props;
 	return (
 		<SearchBoxWrapper>
 			<TextBox 

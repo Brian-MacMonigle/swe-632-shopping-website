@@ -3,7 +3,7 @@ import Styled from 'styled-components';
 import { values } from 'lodash';
 import { filter as searchAlg } from 'fuzzy';
 
-import SearchBar from './SearchBar';
+import { ControlledSearchBar } from './SearchBar';
 import { ALL_FOOD, FoodTable } from '../FoodItem';
 
 const TableWrapper = Styled.div`
@@ -32,20 +32,43 @@ function searchFood(search) {
 }
 
 class SearchPage extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			searchValue: null
+		}
+	}
+
+	onType = (event) => {
+		this.setState({searchValue: event.target.value})
+	}
+
+	onSearch = (history) => {
+		const { state: { searchValue = "" }} = this;
+		if(history && searchValue.length > 0) {
+			history.push(`/search/?search=${searchValue}`)
+		}
+	}
+
 	render() {
-		const { props: { location: { search: rawQuery = "" } = {} } = {} } = this;
+		const { state: { searchValue } = {}, props: { location: { search: rawQuery = "" } = {} } = {} } = this;
+
+		// Get the urlSearch
 		// Need to remove the '?' at the beginning of the query
 		const queries = getQueries(rawQuery.slice(1, rawQuery.length));
-		const { search = "" } = queries;
+		const { search: urlSearch = "" } = queries;
 
-		console.log('SearchPage: ', this, 'rawQuery: ', rawQuery, '\nqueries: ', queries, '\nsearch: ', search, '\nALL_FOOD', ALL_FOOD);
+		// If searchValue not set yet, use url.  Otherwise use interal serachValue
+		const search = searchValue === null ? urlSearch : searchValue;
 
 		const searchResults = searchFood(search);
 
 		return (
 			<React.Fragment>
-				<SearchBar
-					initSearchValue={search}
+				<ControlledSearchBar
+					searchValue={search}
+					onType={this.onType}
+					onSearch={this.onSearch}
 					fontSize={"2em"}
 				/>
 				<TableWrapper>
