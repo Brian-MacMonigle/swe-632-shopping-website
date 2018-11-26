@@ -11,6 +11,7 @@ const ButtonWrapper = Styled.span`
 	color: ${props => props.color || 'black'}
 	background-color: ${props => props.backgroundColor || 'springGreen'}
 	font-size: ${props => props.fontSize || 'inherit'}
+	white-space: nowrap;
 
 	display: flex;
 	justify-content: center;

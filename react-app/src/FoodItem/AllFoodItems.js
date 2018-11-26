@@ -9,7 +9,7 @@ const baseFoodItem = {
 			value: 0,
 			units: "-",
 			value2: 0,
-			units2: "-",
+			units2: "g",
 		},
 		calories: 0,
 		fat: {
@@ -76,9 +76,55 @@ const baseFoodItem = {
 	}
 }
 
+const Beef = {
+	...baseFoodItem,
+	name: "Beef",
+	cost: 10,
+	nutrition: {
+		...baseFoodItem.nutrition,
+		servingSize: {
+			...baseFoodItem.nutrition.servingSize,
+			value: 8,
+			units: "oz",
+		},
+		calories: 200
+	}
+}
+
+const Pork = {
+	...baseFoodItem,
+	name: "Pork",
+	cost: 7,
+	nutrition: {
+		...baseFoodItem.nutrition,
+		servingSize: {
+			...baseFoodItem.nutrition.servingSize,
+			value: 6,
+			units: "oz",
+		},
+		calories: 140
+	}
+}
+
+const Chicken = {
+	...baseFoodItem,
+	name: "Chicken",
+	cost: 5,
+	nutrition: {
+		...baseFoodItem.nutrition,
+		servingSize: {
+			...baseFoodItem.nutrition.servingSize,
+			value: 6,
+			units: "oz",
+		},
+		calories: 70
+	}
+}
 
 const ALL_PROTIEN = {
-
+	Beef,
+	Pork,
+	Chicken,
 };
 
 const wholeMilk = {

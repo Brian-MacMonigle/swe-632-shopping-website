@@ -21,16 +21,6 @@ const SideBarWrapper = Styled.div`
 	}
 `;
 
-const LoginButtonWrapper = Styled.div`
-	border-bottom: 1px solid black;
-
-	display: flex;
-	justify-content: center;
-
-	* {
-		flex: 1 0 0;
-	}
-`
 
 const TableWrapper = Styled.div`
 	flex-grow: 1;
@@ -76,10 +66,6 @@ class SideBar extends React.Component {
 
 		return (
 			<SideBarWrapper>
-				<LoginButtonWrapper>
-					<Button value="Login" />
-					<Button value="Sign Up" />
-				</LoginButtonWrapper>
 				<TableWrapper>
 					<Table 
 						title="Shopping Cart" 

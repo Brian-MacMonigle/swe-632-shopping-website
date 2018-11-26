@@ -2,6 +2,7 @@ import React from 'react';
 import Styled from 'styled-components';
 
 import LinkWrapper from '../LinkWrapper';
+import Button from '../Button';
 
 const HeaderWrapper = Styled.div`
 	display: flex;
@@ -18,6 +19,18 @@ const ElementWrapper = Styled.span`
 	color: white;
 `;
 
+
+const LoginButtonWrapper = Styled.div`
+	font-size: 0.5em;
+
+	display: flex;
+	justify-content: center;
+
+	* {
+		flex: 1 0 0;
+	}
+`;
+
 class Header extends React.Component {
 	render() {
 		return (
@@ -26,6 +39,12 @@ class Header extends React.Component {
 					<LinkWrapper to="/">
 						Brian's Groceries
 					</LinkWrapper>
+				</ElementWrapper>
+				<ElementWrapper>
+					<LoginButtonWrapper>
+						<Button value="Login" />
+						<Button value="Sign Up" />
+					</LoginButtonWrapper>
 				</ElementWrapper>
 			</HeaderWrapper>
 		);

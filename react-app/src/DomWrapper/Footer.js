@@ -13,16 +13,23 @@ const FooterWrapper = Styled.div`
 	justify-content: center;
 `;
 
+const P = Styled.p`
+	margin: 0.25em;
+`
+
 class Footer extends React.Component {
 	render() {
 		return (
 			<FooterWrapper>
-				<p>
-					This website was written by Brian MacMonigle for the final project for SWE 632 at GMU		
-				</p>
-				<p>
+				<P>
+					This website was written by Brian MacMonigle for the final project for SWE 632 at GMU	
+				</P>
+				<P>
 					The website will preform best in Chrome on a Computer (no phones or tablets)
-				</p>
+				</P>
+				<P>
+					* Most numbers are made up and should not be used as diatery advice
+				</P>
 			</FooterWrapper>
 		);
 	}
