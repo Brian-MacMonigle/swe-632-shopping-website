@@ -6,6 +6,10 @@ import { filter as searchAlg } from 'fuzzy';
 import { ControlledSearchBar } from './SearchBar';
 import { ALL_FOOD, FoodTable } from '../FoodItem';
 
+const SearchPageTitle = Styled.h1`
+	text-align: center;
+`;
+
 const TableWrapper = Styled.div`
 	padding: 1em;
 	padding-top: 0;
@@ -65,6 +69,9 @@ class SearchPage extends React.Component {
 
 		return (
 			<React.Fragment>
+				<SearchPageTitle>
+					Search Results
+				</SearchPageTitle>
 				<ControlledSearchBar
 					searchValue={search}
 					onType={this.onType}

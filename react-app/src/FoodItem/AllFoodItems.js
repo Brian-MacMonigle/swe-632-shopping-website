@@ -2,9 +2,14 @@ const baseFoodItem = {
 	name: "<NO NAME>",
 	cost: 0,
 	nutrition: {
+		servingsPerContainer: {
+			value: 0,
+		},
 		servingSize: {
 			value: 0,
-			units: "NONE"
+			units: "-",
+			value2: 0,
+			units2: "-",
 		},
 		calories: 0,
 		fat: {
@@ -54,13 +59,20 @@ const baseFoodItem = {
 			daily: 0
 		},
 		vitamins: {
-			// fakeVitamin: {
-				// 	value: 0,
-				// 	units: "mg"
-				// 	daily: 0,
-			// }
+			fakeVitamin: {
+				name: "Fake Vitamin",
+				value: 0,
+				units: "mg",
+				daily: 0,
+			},
+			fakeVitamin2: {
+				name: "Fake Vitamin2",
+				value: 0,
+				units: "mcg",
+				daily: 0,
+			}
 		},
-		ingredients: "NONE" || ["NONE1", "NONE2"]
+		ingredients: ["-", "-"]
 	}
 }
 
@@ -75,7 +87,11 @@ const wholeMilk = {
 	cost: 3,
 	nutrition: {
 		...baseFoodItem.nutrition,
-		servingSize: "8oz",
+		servingSize: {
+			...baseFoodItem.nutrition.servingSize,
+			value: 8,
+			units: "oz",
+		},
 		calories: 100
 	}
 }
@@ -86,7 +102,11 @@ const skimMilk = {
 	cost: 3,
 	nutrition: {
 		...baseFoodItem.nutrition,
-		servingSize: "8oz",
+		servingSize: {
+			...baseFoodItem.nutrition.servingSize,
+			value: 8,
+			units: "oz",
+		},
 		calories: 50
 	}
 }
@@ -97,7 +117,11 @@ const twoPercentMilk = {
 	cost: 3,
 	nutrition: {
 		...baseFoodItem.nutrition,
-		servingSize: "8oz",
+		servingSize: {
+			...baseFoodItem.nutrition.servingSize,
+			value: 8,
+			units: "oz",
+		},
 		calories: 75
 	}
 }
