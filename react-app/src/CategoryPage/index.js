@@ -28,6 +28,7 @@ function getTableData(type) {
 
 class CategoryPage extends React.Component {
 	render() {
+		const { props: { addItemToShoppingCart = () => {} } = {} } = this;
 		return (
 			<React.Fragment>
 				<CategoryPageTitle>
@@ -36,7 +37,7 @@ class CategoryPage extends React.Component {
 				<TableWrapper>
 					<FoodTable 
 						foodItems={getTableData(this.props.type)}
-						onAdd={(food) => console.log('Add food: ', food)}
+						onAdd={(food) => addItemToShoppingCart(food)}
 						sortable
 					/>
 				</TableWrapper>

@@ -3,6 +3,7 @@ import Styled from 'styled-components';
 
 import Button from '../Button';
 import Table from '../Table';
+import { prettyCost } from '../FoodItem';
 
 // Code that puts the SideBar on the left side is in DomWrapper
 
@@ -16,7 +17,7 @@ const SideBarWrapper = Styled.div`
 	justify-content: space-between;
 
 	* {
-		flex: 1 0 auto;
+		flex: 0 0 auto;
 	}
 `;
 
@@ -43,27 +44,36 @@ const BuyButtonWrapper = Styled.div`
 `;
 
 class SideBar extends React.Component {
-	headers = ["Item", "Item Cost", "Remove Item"];
 
-	footers = ["Total: ", "$3", <Button value="Clear Cart" />];
+	parseFood = (food) => {
+		return food.map(({name, cost}) => ([
+			name,
+			prettyCost(cost),
+		]));
+	}
 
-	rows = [
-		["Milk", "$2", <Button value="Remove" />],
-		["Eggs", "$1", <Button value="Remove" />],
-		["Milk", "$2", <Button value="Remove" />],
-		["Milk", "$2", <Button value="Remove" />],
-		["Eggs", "$1", <Button value="Remove" />],
-		["Milk", "$2", <Button value="Remove" />],
-		["Milk", "$2", <Button value="Remove" />],
-		["Eggs", "$1", <Button value="Remove" />],
-		["Milk", "$2", <Button value="Remove" />],
-		["Milk", "$2", <Button value="Remove" />],
-		["Eggs", "$1", <Button value="Remove" />],
-		["Milk", "$2", <Button value="Remove" />],
-		["Eggs", "$1", <Button value="Remove" />]
-	];
+	getTotal = (food) => {
+		return food.reduce((acc, foodItem) => acc + foodItem.cost, 0);
+	}
 
 	render() {
+		const { props: { shoppingCart: { food = [] } = {}, clearShoppingCart, removeItemFromShoppingCart }} = this;
+
+		const headers =["Item", "Cost"];
+		const footers = ["Total: ", prettyCost(this.getTotal(food))];
+
+		const removeItem = {
+			header: "Remove Item",
+			value: "Remove Item",
+			func: removeItemFromShoppingCart
+		}
+
+		const clearButton = {
+			header: "Remove Item",
+			value: "Clear Cart",
+			func: clearShoppingCart,
+		}
+
 		return (
 			<SideBarWrapper>
 				<LoginButtonWrapper>
@@ -73,18 +83,20 @@ class SideBar extends React.Component {
 				<TableWrapper>
 					<Table 
 						title="Shopping Cart" 
-						headers={this.headers} 
-						footers={this.footers} 
-						rows={this.rows} 
+						headers={headers}
+						footers={footers}
+						rows={this.parseFood(food)}
 						sortable
-						nonSortableHeaders={["Remove Item"]}
+						removeItem={removeItem}
+						clearButton={clearButton}
+						showNutrition={false}
 					/>
 				</TableWrapper>
 				<BuyButtonWrapper>
 					<Button value="Buy Cart" />
 				</BuyButtonWrapper>
 			</SideBarWrapper>
-		);
+		)
 	}
 }
 

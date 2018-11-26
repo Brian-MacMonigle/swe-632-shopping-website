@@ -2,14 +2,15 @@ import React from 'react';
 
 import HoverPopup from '../HoverPopup';
 
-function prettyCost(foodItem) {
-	const { cost = 0 } = foodItem;
+function prettyCost(cost = 0) {
 	return `$${cost.toFixed(2)}`;
 };
 
 function nutritionPopup(foodItem) {
+	const popup = <div>Hello there General Kenobi</div>
+
 	return (
-		<HoverPopup>
+		<HoverPopup popup={popup}>
 			Nutrition Info
 		</HoverPopup>
 	);

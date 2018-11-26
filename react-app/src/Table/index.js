@@ -2,7 +2,7 @@ import React from 'react';
 import Styled from 'styled-components';
 import { sortBy, reduceRight, reverse } from 'lodash';
 
-import { UnstyledButton } from '../Button';
+import Button, { UnstyledButton } from '../Button';
 
 const ComponentWrapper = Styled.div`
 	font-size: ${props => props.fontSize || "1em"};
@@ -131,15 +131,34 @@ class Table extends React.Component {
 	}
 
 	render() {
-		const { props: { headers = [], rows = [[]], footers = [], sortable, nonSortableHeaders = [] } = {}, state: { sort = [] } = {} } = this;
+		let { 
+			props: { 
+				headers = [], 
+				rows = [[]], 
+				footers = [], 
+				sortable, 
+				nonSortableHeaders = [],
+				clearButton,
+				removeItem,
+			} = {}, 
+			state: { 
+				sort = [] 
+			} = {} 
+		} = this;
 
-		// Headers and footers are same lenght (looks weird if not)
-		while(headers.length < footers.length) {
-			headers.push("");
+		if(clearButton) {
+			headers = headers.concat(clearButton.header);
+			nonSortableHeaders = nonSortableHeaders.concat(clearButton.header);
+			footers = footers.concat(<Button value={clearButton.value} onClick={clearButton.func} />);
 		}
 
-		while(footers.length !== 0 && footers.length < headers.length) {
-			footers.push("");
+		if(removeItem) {
+			if(!headers.find(head => head === removeItem.header)) {
+				headers = headers.concat(removeItem.header);
+				nonSortableHeaders = nonSortableHeaders.concat(clearButton.header);
+			}
+			// add button to all rows.  We assume that the clear button is the last element for simplicity
+			rows = rows.map((row, i) => row.concat(<Button value={removeItem.value} onClick={() => removeItem.func(i)} />));
 		}
 
 		// Sort

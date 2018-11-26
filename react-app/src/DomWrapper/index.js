@@ -44,7 +44,63 @@ const FooterWrapper = Styled.div`
 `;
 
 class DomWrapper extends React.Component {
+	// Global state updating functions
+
+	// Shopping Cart
+
+	shoppingCart = {
+		food: [] // full food storage
+	}
+
+	clearShoppingCart = () => {
+		console.log('Clearing shopping cart');
+		this.setState({
+			shoppingCart: this.shoppingCart,
+		})
+	}
+
+	addItemToShoppingCart = (food) => {
+		console.log('Adding item to shopping cart');
+		this.setState((prevState) => ({
+			shoppingCart: {
+				...(prevState.shoppingCart),
+				food: prevState.shoppingCart.food.concat(food),
+			}
+		}));
+	}
+
+	removeItemFromShoppingCart = (index) => {
+		console.log('Removing item from shopping cart');
+		this.setState((prevState) => ({
+			shoppingCart: {
+				...(prevState.shoppingCart),
+				food: prevState.shoppingCart.food.slice(0, index).concat(prevState.shoppingCart.food.slice(index + 1)),
+			}
+		}));
+	}
+
+	// The rest of DomWrapper
+	constructor(props) {
+		super(props);
+		this.state = {}; // to allow easy object deconstruction
+	}
+
+
+	componentDidMount() {
+		this.setState({
+			shoppingCart: this.shoppingCart,
+		})
+	}
+
 	render() {
+		const { 
+			state: { 
+				shoppingCart 
+			} = {},
+			clearShoppingCart,
+			addItemToShoppingCart,
+			removeItemFromShoppingCart,
+		} = this;
 		return (
 			<BrowserRouter>
 				<React.Fragment>
@@ -53,16 +109,20 @@ class DomWrapper extends React.Component {
 							<Header />
 						</HeaderWrapper>
 						<SideBarWrapper>
-							<SideBar />
+							<SideBar 
+								shoppingCart={shoppingCart}
+								clearShoppingCart={clearShoppingCart}
+								removeItemFromShoppingCart={removeItemFromShoppingCart}
+							/>
 						</SideBarWrapper>
 						<PageWrapper>
 							<Switch>
 								<Route exact path="/" component={HomePage} />
 								<Route path="/search" component={SearchPage} />
-								<Route path={`/${PROTIEN}`} render={() => <CategoryPage type={PROTIEN} />} />
-								<Route path={`/${DAIRY}`} render={() => <CategoryPage type={DAIRY} />} />
-								<Route path={`/${CARBS}`} render={() => <CategoryPage type={CARBS} />} />
-								<Route path={`/${SNACKS}`} render={() => <CategoryPage type={SNACKS} />} />
+								<Route path={`/${PROTIEN}`} render={() => <CategoryPage type={PROTIEN} addItemToShoppingCart={addItemToShoppingCart} />} />
+								<Route path={`/${DAIRY}`} render={() => <CategoryPage type={DAIRY} addItemToShoppingCart={addItemToShoppingCart} />} />
+								<Route path={`/${CARBS}`} render={() => <CategoryPage type={CARBS} addItemToShoppingCart={addItemToShoppingCart} />} />
+								<Route path={`/${SNACKS}`} render={() => <CategoryPage type={SNACKS} addItemToShoppingCart={addItemToShoppingCart} />} />
 								<Route path="/" component={PageNotFound} />
 							</Switch>
 						</PageWrapper>

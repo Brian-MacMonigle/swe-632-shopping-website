@@ -21,10 +21,10 @@ class FoodTable extends React.Component {
 		const { defaultProps = {}, props: { foodItems = [], ...rest} } = this;
 
 		const rows = map(foodItems, food => {
-			const { name } = food;
+			const { name, cost } = food;
 			return [
 				name, 
-				prettyCost(food), 
+				prettyCost(cost), 
 				nutritionPopup(food), 
 				(
 					<Button 
