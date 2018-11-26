@@ -3,7 +3,7 @@ import Styled from 'styled-components';
 
 import {PROTIEN, DAIRY, CARBS, SNACKS, prettyCategoryType} from '../FoodItem';
 import LinkWrapper from '../LinkWrapper';
-import SearchBar from '../SearchBar';
+import { SearchBar } from '../SearchPage';
 
 const HomePageWrapper = Styled.div`
 `;

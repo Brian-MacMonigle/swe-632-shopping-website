@@ -21,7 +21,7 @@ class Footer extends React.Component {
 					This website was written by Brian MacMonigle for the final project for SWE 632 at GMU		
 				</p>
 				<p>
-					The website will preform best in Chrome
+					The website will preform best in Chrome on a Computer (no phones or tablets)
 				</p>
 			</FooterWrapper>
 		);

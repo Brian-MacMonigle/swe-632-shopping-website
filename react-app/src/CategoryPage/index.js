@@ -22,7 +22,8 @@ function getTableData(type) {
 		[CARBS]: ALL_CARBS,
 		[SNACKS]: ALL_SNACKS
 	}
-	return convert[type];
+	// Need to turn the json into an array
+	return convert[type] || {};
 };
 
 class CategoryPage extends React.Component {
@@ -33,7 +34,11 @@ class CategoryPage extends React.Component {
 					{prettyCategoryType(this.props.type)}
 				</CategoryPageTitle>
 				<TableWrapper>
-					<FoodTable options foodItems={getTableData(this.props.type)} />
+					<FoodTable 
+						foodItems={getTableData(this.props.type)}
+						onAdd={(food) => console.log('Add food: ', food)}
+						sortable
+					/>
 				</TableWrapper>
 			</React.Fragment>
 		);

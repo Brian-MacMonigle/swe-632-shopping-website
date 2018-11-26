@@ -2,7 +2,7 @@ import React from 'react';
 import Styled from 'styled-components';
 
 import LinkWrapper from '../LinkWrapper';
-import SearchBar from '../SearchBar';
+import { SearchBar } from '../SearchPage';
 
 const HeaderWrapper = Styled.div`
 	display: flex;

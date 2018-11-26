@@ -1,11 +1,16 @@
 import React from 'react';
+import Styled from 'styled-components';
+
+const PopupWrapper = Styled.span`
+	text-decoration: underline;
+`;
 
 class HoverPopup extends React.Component {
 	render() {
 		return (
-			<span>
+			<PopupWrapper>
 				{this.props.children}
-			</span>
+			</PopupWrapper>
 		)
 	}
 }

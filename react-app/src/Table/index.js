@@ -19,7 +19,6 @@ const TitleWrapper = Styled.div`
 const TableWrapper = Styled.table`
 	width: 100%;
 	height: 100%;
-	overlow-y: auto;
 
 	border-collapse: collapse;
 
@@ -55,6 +54,14 @@ const ASCENDING = 1;
 const DECENDING = -1;
 const NONE = 0;
 
+function isModifyingSortState(sortState) {
+	const convert = {
+		[ASCENDING]: 1,
+		[DECENDING]: 1
+	}
+	return convert[sortState] || 0;
+}
+
 function nextSortState(currentSortState) {
 	// default case
 	if(currentSortState === undefined) {
@@ -82,12 +89,10 @@ function prettySortState(sortState) {
 // (each) sorting: { header: "in headers" direction: ASCENDING || DECENDING }
 // 	ex: { header: "Name", direction: DECENDING }.
 function compoundSort(headers, rows, ...sorting) {
-	console.log('compoundSort: ', '\nheaders: ', headers, '\nrows: ', rows, '\nsorting: ', sorting); 
 	return reduceRight(
 		sorting, 
 		(acc, headerAndDirection) => {
-			console.log('reduceRight: ', '\nacc: ', acc, '\nheaderAndDirection: ', headerAndDirection);
-			if(headerAndDirection.direction !== ASCENDING && headerAndDirection.direction !== DECENDING) {
+			if(!isModifyingSortState(headerAndDirection.direction)) {
 				return acc;
 			}
 			const sorted = sortBy(
@@ -96,9 +101,7 @@ function compoundSort(headers, rows, ...sorting) {
 					row[headers.indexOf(headerAndDirection.header)],
 				[],
 			);
-			const res = headerAndDirection.direction === DECENDING ? reverse(sorted) : sorted;
-			console.log('sorted: ', sorted);
-			return sorted;
+			return headerAndDirection.direction === DECENDING ? reverse(sorted) : sorted;
 		},
 		rows
 	);
@@ -188,15 +191,21 @@ class Table extends React.Component {
 					{this.props.title}
 				</TitleWrapper>
 				<TableWrapper>
-					<Thead>
-						{htmlHeaders}
-					</Thead>
-					<Tbody>
-						{htmlRows}
-					</Tbody>
-					<Tfoot>
-						{htmlFooters}
-					</Tfoot>
+					{headers.length > 0 && (
+						<Thead>
+							{htmlHeaders}
+						</Thead>
+					)}
+					{rows.length > 0 && rows[0].length > 0 && (
+						<Tbody>
+							{htmlRows}
+						</Tbody>
+					)}
+					{footers.length > 0 && (
+						<Tfoot>
+							{htmlFooters}
+						</Tfoot>
+					)}
 				</TableWrapper>
 			</ComponentWrapper>
 		);

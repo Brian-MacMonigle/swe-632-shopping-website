@@ -14,6 +14,10 @@ const SideBarWrapper = Styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+
+	* {
+		flex: 1 0 auto;
+	}
 `;
 
 const LoginButtonWrapper = Styled.div`
@@ -30,6 +34,8 @@ const LoginButtonWrapper = Styled.div`
 const TableWrapper = Styled.div`
 	flex-grow: 1;
 	overflow-y: auto;
+
+	flex-shrink: 1;
 `;
 
 const BuyButtonWrapper = Styled.div`
@@ -42,6 +48,15 @@ class SideBar extends React.Component {
 	footers = ["Total: ", "$3", <Button value="Clear Cart" />];
 
 	rows = [
+		["Milk", "$2", <Button value="Remove" />],
+		["Eggs", "$1", <Button value="Remove" />],
+		["Milk", "$2", <Button value="Remove" />],
+		["Milk", "$2", <Button value="Remove" />],
+		["Eggs", "$1", <Button value="Remove" />],
+		["Milk", "$2", <Button value="Remove" />],
+		["Milk", "$2", <Button value="Remove" />],
+		["Eggs", "$1", <Button value="Remove" />],
+		["Milk", "$2", <Button value="Remove" />],
 		["Milk", "$2", <Button value="Remove" />],
 		["Eggs", "$1", <Button value="Remove" />],
 		["Milk", "$2", <Button value="Remove" />],

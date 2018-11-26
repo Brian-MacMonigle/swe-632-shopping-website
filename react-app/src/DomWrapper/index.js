@@ -2,12 +2,13 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Styled from 'styled-components';
 
-import Header from '../Header';
-import SideBar from '../SideBar';
-import Footer from '../Footer';
+import Header from './Header';
+import SideBar from './SideBar';
+import Footer from './Footer';
 import PageNotFound from '../PageNotFound';
 import HomePage from '../HomePage';
 import CategoryPage from '../CategoryPage';
+import SearchPage from '../SearchPage';
 import {PROTIEN, DAIRY, CARBS, SNACKS} from '../FoodItem';
 
 const DomPageWrapper = Styled.div`
@@ -57,6 +58,7 @@ class DomWrapper extends React.Component {
 						<PageWrapper>
 							<Switch>
 								<Route exact path="/" component={HomePage} />
+								<Route path="/search" component={SearchPage} />
 								<Route path={`/${PROTIEN}`} render={() => <CategoryPage type={PROTIEN} />} />
 								<Route path={`/${DAIRY}`} render={() => <CategoryPage type={DAIRY} />} />
 								<Route path={`/${CARBS}`} render={() => <CategoryPage type={CARBS} />} />

@@ -14,7 +14,7 @@ class SearchBar extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			searchValue: "",
+			searchValue: props.initSearchValue || "",
 		}
 		this.SearchButton = withRouter(({ history }) => (
 			<Button
@@ -33,7 +33,7 @@ class SearchBar extends React.Component {
 	onSearch = (history) => {
 		if(this.state.searchValue.length !== 0) {
 			console.log(`You have search for '${this.state.searchValue}'`);
-			history.push(`/search/?val=${this.state.searchValue}`)
+			history.push(`/search/?search=${this.state.searchValue}`)
 		}
 	}
 
