@@ -93,7 +93,7 @@ class Header extends React.Component {
 					</HeaderLinkWrapper>
 					<HeaderLinkWrapper>
 						<LinkWrapper to="/search">
-							Search
+							All
 						</LinkWrapper>
 					</HeaderLinkWrapper>
 				</ElementWrapper>
