@@ -2,6 +2,7 @@ import React from 'react';
 import Styled from 'styled-components';
 import { values } from 'lodash';
 import { filter as searchAlg } from 'fuzzy';
+import { withRouter } from 'react-router-dom';
 
 import { ControlledSearchBar } from './SearchBar';
 import { ALL_FOOD, FoodTable } from '../FoodItem';
@@ -57,6 +58,8 @@ class SearchPage extends React.Component {
 	render() {
 		const { state: { searchValue } = {}, props: { location: { search: rawQuery = "" } = {}, addItemToShoppingCart } = {} } = this;
 
+		console.log('SearchPage: ', this);
+
 		// Get the urlSearch
 		// Need to remove the '?' at the beginning of the query
 		const queries = getQueries(rawQuery.slice(1, rawQuery.length));
@@ -90,5 +93,5 @@ class SearchPage extends React.Component {
 	}
 }
 
-export default SearchPage;
+export default withRouter(SearchPage);
 export { searchFood };
