@@ -1,5 +1,6 @@
 import React from 'react';
 import Styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
 
 import { FoodTable } from '../FoodItem';
 import { ControlledSearchBar, searchFood } from '../SearchPage';
@@ -44,6 +45,14 @@ class CategoryPage extends React.Component {
 		const food = convert[type] || {};
 		return searchFood(food, searchValue);
 	};
+
+	componentDidUpdate(prevProps) {
+		if (this.props.location !== prevProps.location) {
+			this.setState({
+				searchValue: '',
+			});
+		}
+	}
 
 	onType = (event) => {
 		this.setState({searchValue: event.target.value})
@@ -92,4 +101,4 @@ class CategoryPage extends React.Component {
 	}
 }
 
-export default CategoryPage;
+export default withRouter(CategoryPage);
